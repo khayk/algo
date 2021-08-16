@@ -1,4 +1,6 @@
 #include "geometry/Vector.h"
+#include "geometry/Math.h"
+
 #include <gtest/gtest.h>
 
 using Vec2 = alg::Vector2d;
@@ -66,6 +68,8 @@ TEST(VectorTests, Compare) {
   EXPECT_TRUE(a != b);
   EXPECT_TRUE(a == a);
   EXPECT_TRUE(b == b);
+  EXPECT_TRUE(a < b);
+  EXPECT_FALSE(a < a);
 }
 
 
@@ -101,4 +105,20 @@ TEST(VectorTests, Perp) {
   Vec2 a{3, 7};
   Vec2 e{7, -3};
   EXPECT_EQ(a.perp(), e);
+}
+
+
+TEST(VectorTests, Distance) {
+  Vec2 a{2, 2};
+  Vec2 b{6, 5};
+
+  EXPECT_EQ((a - b).length(), 5);
+}
+
+
+TEST(VectorTests, Rotate) {
+  Vec2 a{10, 3};
+  Vec2 e{-3, 10};
+
+  EXPECT_EQ(alg::rotate(a, 90.0), e);
 }

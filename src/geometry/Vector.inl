@@ -27,14 +27,14 @@ inline Real& Vector2<Real>::y() noexcept {
 
 template <typename Real>
 inline Vector2<Real> Vector2<Real>::operator+(
-    const Vector2<Real>& vec) const noexcept {
-  return Vector2<Real>(x() + vec.x(), y() + vec.y());
+    const Vector2<Real>& v) const noexcept {
+  return Vector2<Real>(x() + v.x(), y() + v.y());
 }
 
 template <typename Real>
 inline Vector2<Real> Vector2<Real>::operator-(
-    const Vector2& vec) const noexcept {
-  return Vector2(x() - vec.x(), y() - vec.y());
+    const Vector2& v) const noexcept {
+  return Vector2(x() - v.x(), y() - v.y());
 }
 
 template <typename Real>
@@ -94,8 +94,18 @@ inline Vector2<Real>& Vector2<Real>::operator/=(const Real scalar) noexcept {
 }
 
 template <typename Real>
+bool Vector2<Real>::operator<(const Vector2& other) const noexcept {
+  if (fabs(x() - other.x()) > Math<Real>::kEpsilon) {
+    return x() < other.x();
+  }
+
+  return y() < other.y();
+}
+
+template <typename Real>
 inline bool Vector2<Real>::operator==(const Vector2& other) const noexcept {
-  return tuple_[0] == other.tuple_[0] && tuple_[1] == other.tuple_[1];
+  return fabs(x() - other.x()) < Math<Real>::kEpsilon &&
+         fabs(y() - other.y()) < Math<Real>::kEpsilon;
 }
 
 template <typename Real>
@@ -147,7 +157,16 @@ inline Vector2<Real> operator*(const Real scalar,
 }
 
 template <typename Real>
-inline std::ostream& operator<<(std::ostream& out, const Vector2<Real>& vec) {
-  out << vec.x() << ", " << vec.y();
+inline std::ostream& operator<<(std::ostream& out, const Vector2<Real>& v) {
+  out << '(' << v.x() << ", " << v.y() << ')';
   return out;
 }
+
+template <typename Real>
+inline Vector2<Real> rotate(const Vector2<Real>& v, Real theta) {
+  Real rad = Math<Real>::kDegToRad * theta;  // multiply theta with PI / 180.0
+
+  return Vector2<Real>(v.x() * cos(rad) - v.y() * sin(rad),
+                       v.x() * sin(rad) + v.y() * cos(rad));
+}
+

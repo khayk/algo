@@ -148,5 +148,6 @@ inline Vector2<Real> operator*(const Real scalar,
 
 template <typename Real>
 inline std::ostream& operator<<(std::ostream& out, const Vector2<Real>& vec) {
-  out << x() << ", " << y();
+  out << vec.x() << ", " << vec.y();
+  return out;
 }

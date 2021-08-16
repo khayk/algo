@@ -67,3 +67,38 @@ TEST(VectorTests, Compare) {
   EXPECT_TRUE(a == a);
   EXPECT_TRUE(b == b);
 }
+
+
+TEST(VectorTests, Length) {
+  Vec2 a{3, 4};
+
+  EXPECT_EQ(a.length(), 5);
+  EXPECT_EQ(a.squaredLength(), 25);
+}
+
+
+TEST(VectorTests, Dot) {
+  Vec2 a{0, 2};
+  Vec2 b{1, 0};
+
+  EXPECT_EQ(a.dot(b), 0);
+  EXPECT_EQ(a.dot(a), 4);
+}
+
+
+TEST(VectorTests, Cross) {
+  Vec2 a{0, 2};
+  Vec2 b{5, 0};
+
+  EXPECT_EQ(b.cross(a), 10);
+  EXPECT_EQ(a.cross(b), -10);
+  EXPECT_EQ(b.cross(b), 0);
+  EXPECT_EQ(a.cross(a), 0);
+}
+
+
+TEST(VectorTests, Perp) {
+  Vec2 a{3, 7};
+  Vec2 e{7, -3};
+  EXPECT_EQ(a.perp(), e);
+}

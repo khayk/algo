@@ -1,7 +1,7 @@
 #include "geometry/Vector.h"
 #include <gtest/gtest.h>
 
-using Vec2 = alg::Vector2<double>;
+using Vec2 = alg::Vector2d;
 
 TEST(VectorTests, Addition) {
   Vec2 a {1, 1};
@@ -56,4 +56,14 @@ TEST(VectorTests, NormalizeZero) {
   EXPECT_EQ(a.length(), 0);
   EXPECT_NO_THROW(a.normalize());
   EXPECT_EQ(a.length(), 0);
+}
+
+
+TEST(VectorTests, Compare) {
+  Vec2 a{1, 1};
+  Vec2 b{1, 1.0000001};
+
+  EXPECT_TRUE(a != b);
+  EXPECT_TRUE(a == a);
+  EXPECT_TRUE(b == b);
 }

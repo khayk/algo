@@ -1,5 +1,8 @@
 #pragma once
 
+#include <limits>
+#include <iosfwd>
+
 namespace alg {
 
 template <typename Real>
@@ -7,133 +10,53 @@ class Vector2 {
   Real tuple_[2]{};
 
  public:
-  static const Real EPSILON;
-
   Vector2() = default;
-
-  Vector2(Real x, Real y) {
-    tuple_[0] = x;
-    tuple_[1] = y;
-  }
-
+  Vector2(Real x, Real y);
   Vector2(const Vector2& v) = default;
 
-  Real x() const noexcept {
-    return tuple_[0];
-  }
+  Real x() const noexcept;
+  Real y() const noexcept;
+  Real& x() noexcept;
+  Real& y() noexcept;
 
-  Real y() const noexcept {
-    return tuple_[1];
-  }
+  Vector2 operator+(const Vector2& vec) const noexcept;
+  Vector2 operator-(const Vector2& vec) const noexcept;
+  Vector2 operator*(Real scalar) const noexcept;
+  Vector2 operator/(Real scalar) const noexcept;
 
-  Real& x() noexcept {
-    return tuple_[0];
-  }
+  Vector2 operator-() const noexcept;
 
-  Real& y() noexcept {
-    return tuple_[1];
-  }
+  Vector2& operator+=(const Vector2& v) noexcept;
+  Vector2& operator-=(const Vector2& v) noexcept;
+  Vector2& operator*=(const Real scalar) noexcept;
+  Vector2& operator/=(const Real scalar) noexcept;
 
-  Vector2& operator+=(const Vector2& v) noexcept {
-    x() += v.x();
-    y() += v.y();
+  bool operator==(const Vector2<Real>& other) const noexcept;
+  bool operator!=(const Vector2<Real>& other) const noexcept;
 
-    return *this;
-  }
+  Real length() const noexcept;
+  Real squaredLength() const noexcept;
+  Real dot(const Vector2& v) const noexcept;
+  Real cross(const Vector2& v) const noexcept;
+  Vector2& normalize() noexcept;
+  Vector2 perp() const noexcept;
 
-  Vector2& operator-=(const Vector2& v) noexcept {
-    x() -= v.x();
-    y() -= v.y();
-
-    return *this;
-  }
-
-  template <typename U>
-  Vector2& operator*=(const U scalar) noexcept {
-    x() *= scalar;
-    y() *= scalar;
-
-    return *this;
-  }
-
-  template <typename U>
-  Vector2& operator/=(const U scalar) {
-    if (std::abs(scalar) <= Vector2::EPSILON) {
-      throw std::runtime_error("Division to zero");
-    }
-
-    x() /= scalar;
-    y() /= scalar;
-
-    return *this;
-  }
-
-  Real length() const noexcept {
-    return std::sqrt(squaredLength());
-  }
-
-  Real squaredLength() const noexcept {
-    return x() * x() + y() * y();
-  }
-
-  Real dot(const Vector2& v) const noexcept {
-    return x() * v.x() + y() * v.y();
-  }
-
-  Real cross(const Vector2& v) const noexcept {
-    return x() * v.y() - y() * v.x();
-  };
-
-  Vector2& normalize() noexcept {
-    const auto l = length();
-
-    if (std::abs(l) > Vector2::EPSILON) {
-      x() /= l;
-      y() /= l;
-    }
-
-    return *this;
-  }
+  static const Vector2 kUnitX;
+  static const Vector2 kUnitY;
+  static const Vector2 kZero;
+  static const Vector2 kOne;
 };
 
-
 template <typename Real>
-inline Vector2<Real> operator+(const Vector2<Real>& p,
-                               const Vector2<Real>& q) noexcept {
-  Vector2<Real> r = p;
-  r += q;
+Vector2<Real> operator*(const Real scalar, const Vector2<Real>& p) noexcept;
 
-  return r;
-}
-
-
+// Debugging output.
 template <typename Real>
-inline Vector2<Real> operator-(const Vector2<Real>& p,
-                               const Vector2<Real>& q) noexcept {
-  Vector2<Real> r = p;
-  r -= q;
+std::ostream& operator<<(std::ostream& out, const Vector2<Real>& vec);
 
-  return r;
-}
+#include "Vector.inl"
 
-
-template <typename Real, typename U>
-inline Vector2<Real> operator*(const Vector2<Real>& p,
-                               const U scalar) noexcept {
-  Vector2<Real> r = p;
-  r *= scalar;
-
-  return r;
-}
-
-
-template <typename Real, typename U>
-inline Vector2<Real> operator*(const U scalar,
-                               const Vector2<Real>& p) noexcept {
-  Vector2<Real> r = p;
-  r *= scalar;
-
-  return r;
-}
+typedef Vector2<float> Vector2f;
+typedef Vector2<double> Vector2d;
 
 }  // namespace alg

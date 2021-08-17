@@ -1,3 +1,4 @@
+namespace alg {
 
 template <typename Real>
 inline Vector2<Real>::Vector2(Real x, Real y) {
@@ -170,3 +171,4 @@ inline Vector2<Real> rotate(const Vector2<Real>& v, Real theta) {
                        v.x() * sin(rad) + v.y() * cos(rad));
 }
 
+}  // namespace alg

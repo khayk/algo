@@ -76,9 +76,9 @@ std::ostream& operator<<(std::ostream& out, const Vector2<Real>& v);
 template <typename Real>
 Vector2<Real> rotate(const Vector2<Real>& v, Real theta);
 
-#include "Vector.inl"
-
 typedef Vector2<float> Vector2f;
 typedef Vector2<double> Vector2d;
 
 }  // namespace alg
+
+#include "Vector.inl"

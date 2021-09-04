@@ -1,9 +1,15 @@
 namespace alg {
 
 template <typename Real>
-inline Vector2<Real>::Vector2(Real x, Real y) {
+inline Vector2<Real>::Vector2(Real x, Real y) noexcept {
   tuple_[0] = x;
   tuple_[1] = y;
+}
+
+template <typename Real>
+inline Vector2<Real>::Vector2(const Tuple2<Real>& t) noexcept {
+  tuple_[0] = t[0];
+  tuple_[1] = t[1];
 }
 
 template <typename Real>
@@ -92,26 +98,6 @@ inline Vector2<Real>& Vector2<Real>::operator/=(const Real scalar) noexcept {
   }
 
   return *this;
-}
-
-template <typename Real>
-bool Vector2<Real>::operator<(const Vector2& other) const noexcept {
-  if (fabs(x() - other.x()) > Math<Real>::kEpsilon) {
-    return x() < other.x();
-  }
-
-  return y() < other.y();
-}
-
-template <typename Real>
-inline bool Vector2<Real>::operator==(const Vector2& other) const noexcept {
-  return fabs(x() - other.x()) < Math<Real>::kEpsilon &&
-         fabs(y() - other.y()) < Math<Real>::kEpsilon;
-}
-
-template <typename Real>
-inline bool Vector2<Real>::operator!=(const Vector2<Real>& other) const noexcept {
-  return !(*this).operator==(other);
 }
 
 template <typename Real>

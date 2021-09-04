@@ -1,20 +1,17 @@
 #pragma once
 
 #include "Math.h"
-
-#include <limits>
-#include <iosfwd>
+#include "Tuple.h"
 
 namespace alg {
 
 template <typename Real>
-class Vector2 {
-  Real tuple_[2]{};
-
+class Vector2 : public Tuple2<Real> {
  public:
-  Vector2() = default;
-  Vector2(Real x, Real y);
-  Vector2(const Vector2& v) = default;
+  Vector2() noexcept = default;
+  Vector2(Real x, Real y) noexcept;
+  Vector2(const Tuple2<Real>& t) noexcept;
+  Vector2(const Vector2& v) noexcept = default;
 
   /** 
    * @brief  Coordinate access.
@@ -23,13 +20,6 @@ class Vector2 {
   Real y() const noexcept;
   Real& x() noexcept;
   Real& y() noexcept;
-
-  /**
-   * @brief  Comparison.
-   */
-  bool operator<(const Vector2<Real>& other) const noexcept;
-  bool operator==(const Vector2<Real>& other) const noexcept;
-  bool operator!=(const Vector2<Real>& other) const noexcept;
 
   /** 
    * @brief  Arithmetic operations.
@@ -58,10 +48,13 @@ class Vector2 {
   Vector2& normalize() noexcept;
   Vector2 perp() const noexcept;
 
-  static const Vector2 kUnitX;
-  static const Vector2 kUnitY;
-  static const Vector2 kZero;
-  static const Vector2 kOne;
+  static const Vector2 kZero;   //< (0, 0)
+  static const Vector2 kUnitX;  //< (1, 0)
+  static const Vector2 kUnitY;  //< (0, 1)
+  static const Vector2 kOne;    //< (1, 1)
+
+protected:
+    using Tuple2<Real>::tuple_;
 };
 
 template <typename Real>

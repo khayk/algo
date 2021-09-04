@@ -15,4 +15,7 @@ class Math {
   static const Real kRadToDeg;
 };
 
+typedef Math<float> Mathf;
+typedef Math<double> Mathd;
+
 }  // namespace alg

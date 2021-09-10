@@ -27,10 +27,9 @@ size_t partition(std::vector<T>& v, size_t l, size_t h) {
   return firstHigh;
 }
 
+
 template <typename T>
 T kthElement(std::vector<T>& v, size_t k) {
-  if (v.empty()) return std::numeric_limits<T>::max();
-
   if (k >= v.size())
     throw std::system_error(std::make_error_code(std::errc::invalid_argument));
 

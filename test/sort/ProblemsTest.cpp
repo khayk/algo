@@ -16,6 +16,7 @@ TEST(SortProblemsTests, Partition) {
   }
 }
 
+
 TEST(SortProblemsTests, KthElement) {
   std::vector<int> v = {5, 2, 5, 4, 17, -1, 0, 1};
   std::vector<int> vc = v;
@@ -24,4 +25,6 @@ TEST(SortProblemsTests, KthElement) {
   for (size_t i = 0; i < vc.size(); ++i) {
     EXPECT_EQ(alg::kthElement(v, i), vc[i]);
   }
+
+  EXPECT_THROW(alg::kthElement(v, v.size()), std::system_error);
 }

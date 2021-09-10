@@ -1,5 +1,8 @@
 #pragma once
 
+#include <limits>
+#include <vector>
+
 namespace alg {
 
 template <typename T>
@@ -25,8 +28,27 @@ size_t partition(std::vector<T>& v, size_t l, size_t h) {
 }
 
 template <typename T>
-T findKthSmallest(const std::vector<T>& data, size_t k) {
+T kthElement(std::vector<T>& v, size_t k) {
+  if (v.empty()) return std::numeric_limits<T>::max();
 
+  if (k >= v.size())
+    throw std::system_error(std::make_error_code(std::errc::invalid_argument));
+
+  size_t n = v.size();
+  size_t l = 0;
+  size_t h = v.size() - 1;
+
+  while (n != k) {
+    n = partition(v, l, h);
+
+    if (n < k) {
+      l = n + 1;
+    } else if (n > k) {
+      h = n - 1;
+    }
+  }
+
+  return v[k];
 }
 
 }  // namespace alg

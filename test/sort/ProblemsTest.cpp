@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include "sort/Problems.h"
+#include <gtest/gtest.h>
+#include <algorithm>
 
 TEST(SortProblemsTests, Partition) {
   std::vector<int> v = {4, 6, -1, 0};
@@ -13,5 +13,15 @@ TEST(SortProblemsTests, Partition) {
 
   while (i < v.size()) {
     EXPECT_GE(v[i++], v[p]);
+  }
+}
+
+TEST(SortProblemsTests, KthElement) {
+  std::vector<int> v = {5, 2, 5, 4, 17, -1, 0, 1};
+  std::vector<int> vc = v;
+  std::sort(vc.begin(), vc.end());
+
+  for (size_t i = 0; i < vc.size(); ++i) {
+    EXPECT_EQ(alg::kthElement(v, i), vc[i]);
   }
 }

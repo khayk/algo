@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <vector>
+#include <tuple>
 
 namespace alg {
 
@@ -49,5 +50,29 @@ T kthElement(std::vector<T>& v, size_t k) {
 
   return v[k];
 }
+
+
+/**
+ * @brief  Let S be an unsorted array of n integers. Give an algorithm that
+ *         finds the pair x, y from S that maximizes |x - y|. Your algorithm must run
+ *         in O(n) worst-case time.
+ *
+ * @param v  An input array
+ *
+ * @return  x and y elements
+ */
+template <typename T>
+std::tuple<T, T> maxDifference(const std::vector<T>& v) {
+  T min = std::numeric_limits<T>::max();
+  T max = std::numeric_limits<T>::min();
+
+  for (const auto& e : v) {
+    if (v < min) min = v;
+    if (v > max) max = v;
+  }
+
+  return std::make_tuple(max, min);
+}
+
 
 }  // namespace alg

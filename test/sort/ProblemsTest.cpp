@@ -28,3 +28,7 @@ TEST(SortProblemsTests, KthElement) {
 
   EXPECT_THROW(alg::kthElement(v, v.size()), std::system_error);
 }
+
+
+TEST(SortProblemsTests, MaxDifference) {
+}

@@ -149,12 +149,4 @@ inline std::ostream& operator<<(std::ostream& out, const Vector2<Real>& v) {
   return out;
 }
 
-template <typename Real>
-inline Vector2<Real> rotate(const Vector2<Real>& v, Real theta) {
-  Real rad = Math<Real>::kDegToRad * theta;  // multiply theta with PI / 180.0
-
-  return Vector2<Real>(v.x() * cos(rad) - v.y() * sin(rad),
-                       v.x() * sin(rad) + v.y() * cos(rad));
-}
-
 }  // namespace alg

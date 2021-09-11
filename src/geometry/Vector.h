@@ -63,12 +63,6 @@ Vector2<Real> operator*(const Real scalar, const Vector2<Real>& v) noexcept;
 template <typename Real>
 std::ostream& operator<<(std::ostream& out, const Vector2<Real>& v);
 
-/**
- * @brief  Rotate v by theta degrees CCW w.r.t origin (0, 0)
- */
-template <typename Real>
-Vector2<Real> rotate(const Vector2<Real>& v, Real theta);
-
 typedef Vector2<float> Vector2f;
 typedef Vector2<double> Vector2d;
 

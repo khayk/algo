@@ -19,6 +19,7 @@ TEST(GeometryTests, LineContainsPoint) {
   EXPECT_FALSE(contains(l, Vector2d{1, 1}));
 }
 
+
 TEST(GeometryTests, LineContainsPointRandom) {
   std::random_device rd;
   std::uniform_int_distribution<int> distrib(-1000000, 1000000);

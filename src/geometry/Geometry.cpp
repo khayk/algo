@@ -30,6 +30,8 @@ IntersectionType intersect(const Line2<Real>& l0, const Line2<Real> l1,
   reutrn type;
 }
 
+// Force template instantiation for the type double
 template bool contains(const Line2d&, const Vector2d&);
+template Vector2d rotate(const Vector2d& v, double theta);
 
 }  // namespace alg

@@ -114,12 +114,3 @@ TEST(VectorTests, Distance) {
 
   EXPECT_EQ((a - b).length(), 5);
 }
-
-
-TEST(VectorTests, Rotate) {
-  Vec2 a{10, 3};
-  Vec2 e{-3, 10};
-
-  a = alg::rotate(a, 90.0);
-  EXPECT_TRUE((a - e).squaredLength() < alg::Math<double>::kEpsilon);
-}

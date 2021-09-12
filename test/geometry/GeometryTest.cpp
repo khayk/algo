@@ -6,6 +6,15 @@
 
 using namespace alg;
 
+TEST(GeometryTests, VectorRotate) {
+  Vector2d a{10, 3};
+  Vector2d e{-3, 10};
+
+  a = alg::rotate(a, 90.0);
+  EXPECT_TRUE((a - e).squaredLength() < alg::Math<double>::kEpsilon);
+}
+
+
 TEST(GeometryTests, LineContainsPoint) {
   Vector2d o{0, 0};
   Vector2d d{1, 0};

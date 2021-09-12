@@ -67,8 +67,8 @@ std::tuple<T, T> maxDifference(const std::vector<T>& v) {
   T max = std::numeric_limits<T>::min();
 
   for (const auto& e : v) {
-    if (v < min) min = v;
-    if (v > max) max = v;
+    if (e < min) min = e;
+    if (e > max) max = e;
   }
 
   return std::make_tuple(max, min);

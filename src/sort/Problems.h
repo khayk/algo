@@ -53,13 +53,15 @@ T kthElement(std::vector<T>& v, size_t k) {
 
 
 /**
- * @brief  Let S be an unsorted array of n integers. Give an algorithm that
- *         finds the pair x, y from S that maximizes |x - y|. Your algorithm must run
- *         in O(n) worst-case time.
+ * @brief Let S be an unsorted array of n integers. Give an algorithm that
+ *        finds the pair x, y from S that maximizes |x - y|. Your algorithm must run
+ *        in O(n) worst-case time.
  *
- * @param v  An input array
+ * @param v An input array
  *
- * @return  x and y elements
+ * @refs skiena 4-2,
+ * 
+ * @return x and y elements
  */
 template <typename T>
 std::tuple<T, T> maxDifference(const std::vector<T>& v) {
@@ -74,5 +76,20 @@ std::tuple<T, T> maxDifference(const std::vector<T>& v) {
   return std::make_tuple(max, min);
 }
 
+
+/**
+ * @brief Give an efficient algorithm to take the array of citation counts
+ *        (each count is a non-negative integer) of a researcher's papers, and
+ *        compute the researcher's h-index. By definition, a scientist has
+ *        index h if h of his or her n papers have been cited at least h times,
+ *        while the other n - h papers each have no more than h citations.
+ *
+ * @param citations  citation counts, array of non-negative integers
+ *
+ * @refs skiena 4-7, leetcode 274,
+ * 
+ * @return h-index of the researcher
+ */
+uint32_t computeHIndex(std::vector<uint32_t>& citations);
 
 }  // namespace alg

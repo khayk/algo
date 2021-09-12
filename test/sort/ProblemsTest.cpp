@@ -36,3 +36,18 @@ TEST(SortProblemsTests, MaxDifference) {
 
   EXPECT_EQ(std::abs(std::get<0>(pairs) - std::get<1>(pairs)), 16);
 }
+
+
+TEST(SortProblemsTests, ComputeHIndex) {
+  std::vector<uint32_t> v = {6, 13, 19, 3, 8};
+  auto hi = alg::computeHIndex(v);
+  EXPECT_EQ(hi, 4U);
+
+  v = {3, 0, 6, 1, 5};
+  hi = alg::computeHIndex(v);
+  EXPECT_EQ(hi, 3U);
+
+  v = {1, 3, 1};
+  hi = alg::computeHIndex(v);
+  EXPECT_EQ(hi, 1U);
+}

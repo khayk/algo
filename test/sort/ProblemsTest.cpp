@@ -51,3 +51,23 @@ TEST(SortProblemsTests, ComputeHIndex) {
   hi = alg::computeHIndex(v);
   EXPECT_EQ(hi, 1U);
 }
+
+
+TEST(SortProblemsTests, MajorityElement) {
+  std::vector<int> v = {1, 2, 5, 9, 5, 9, 5, 5, 5, 5};
+  
+  int m = alg::majorityElement(v);
+  EXPECT_EQ(m, 5);
+
+  v = {1, 1, 3, 2, 1, 2, 1, 2, 2, 1, 1};
+  m = alg::majorityElement(v);
+  EXPECT_EQ(m, 1);
+
+  v = {1, 1, 3, 2, 1, 2, 2, 2, 1, 1};
+  m = alg::majorityElement(v);
+  EXPECT_EQ(m, std::numeric_limits<int>::min());
+
+  v = {4, 4, 1, 4, 4, 1, 1, 1, 4, 4};
+  m = alg::majorityElement(v);
+  EXPECT_EQ(m, 4);
+}

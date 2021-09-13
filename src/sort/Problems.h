@@ -53,14 +53,14 @@ T kthElement(std::vector<T>& v, size_t k) {
 
 
 /**
- * @brief Let S be an unsorted array of n integers. Give an algorithm that
- *        finds the pair x, y from S that maximizes |x - y|. Your algorithm must run
- *        in O(n) worst-case time.
+ * @brief  Let S be an unsorted array of n integers. Give an algorithm that finds
+ * the pair x, y from S that maximizes |x - y|. Your algorithm must run in O(n)
+ * worst-case time.
  *
  * @param v An input array
  *
  * @refs skiena 4-2,
- * 
+ *
  * @return x and y elements
  */
 template <typename T>
@@ -78,18 +78,67 @@ std::tuple<T, T> maxDifference(const std::vector<T>& v) {
 
 
 /**
- * @brief Give an efficient algorithm to take the array of citation counts
- *        (each count is a non-negative integer) of a researcher's papers, and
- *        compute the researcher's h-index. By definition, a scientist has
- *        index h if h of his or her n papers have been cited at least h times,
- *        while the other n - h papers each have no more than h citations.
+ * @brief  Give an efficient algorithm to take the array of citation counts
+ * (each count is a non-negative integer) of a researcher's papers, and compute
+ * the researcher's h-index. By definition, a scientist has index h if h of his
+ * or her n papers have been cited at least h times, while the other n - h
+ * papers each have no more than h citations.
  *
  * @param citations  citation counts, array of non-negative integers
  *
  * @refs skiena 4-7, leetcode 274,
- * 
+ *
  * @return h-index of the researcher
  */
 uint32_t computeHIndex(std::vector<uint32_t>& citations);
+
+
+/**
+ * @brief  Design an O(n) algorithm that, given a list of n elements, finds all
+ * the elements that appear more than n/2 times in the list. If such an element
+ * doesn't exists, returns the minimum value of type T.
+ *
+ * @return The element, that appears more then n/2 times
+ */
+template <typename T>
+T majorityElement(const std::vector<T>& elems)
+{
+  T candidate = 0;
+  size_t count = 0;
+
+  for (const auto& e : elems) {
+    if (count == 0) {
+      candidate = e;
+    }
+
+    if (candidate == e) {
+      ++count;
+    } else {
+      --count;
+    }
+  }
+
+  count = std::count(std::begin(elems), std::end(elems), candidate);
+
+  if (static_cast<size_t>(count) > elems.size() / 2) {
+    return candidate;
+  }
+  
+  return std::numeric_limits<T>::min();
+}
+
+
+/**
+ * @brief  Design an O(n) algorithm that, given a list of n elements, finds all
+ * the elements that appear more than n/4 times.
+ *
+ * @return The element, that appears more then n/4 times
+ */
+template <typename T>
+T quarterElement(const std::vector<T>& elems) {
+
+  return T();
+}
+
 
 }  // namespace alg

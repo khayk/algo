@@ -6,6 +6,16 @@
 
 namespace alg {
 
+/**
+ * @brief  Partitions a given vector by the random pivot in the range [l, h]
+ *
+ * @param v  An input array
+ * @param l  The start of the range (lower one)
+ * @param h  The end of the range (bigger one)
+ *
+ * @return  An index (i), where all elements in the [l, i) are smaller then v[i]
+ *          and all elements in (i, h] are not smaller then v[i]
+ */
 template <typename T>
 size_t partition(std::vector<T>& v, size_t l, size_t h) {
   if (l >= h) return l;
@@ -29,6 +39,16 @@ size_t partition(std::vector<T>& v, size_t l, size_t h) {
 }
 
 
+/**
+ * @brief  Returns a k-th smallest element in the array. The elements of the
+ * array can be moved from their's original positions. The complexity of this
+ * algorithm is O(n)
+ *
+ * @param v  An input array
+ * @param k  The value of k
+ *
+ * @return  k-th smallest element.
+ */
 template <typename T>
 T kthElement(std::vector<T>& v, size_t k) {
   if (k >= v.size())
@@ -123,7 +143,7 @@ T majorityElement(const std::vector<T>& elems)
   if (static_cast<size_t>(count) > elems.size() / 2) {
     return candidate;
   }
-  
+
   return std::numeric_limits<T>::min();
 }
 

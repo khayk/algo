@@ -155,9 +155,32 @@ T majorityElement(const std::vector<T>& elems)
  * @return The element, that appears more then n/4 times
  */
 template <typename T>
-T quarterElement(const std::vector<T>& elems) {
+std::vector<T> quarterElements(const std::vector<T>& elems) {
+  std::vector<T> v = elems;
+  std::vector<T> out;
 
-  return T();
+  auto select = [&out, &v](T candidate) {
+    auto count = std::count(std::begin(v), std::end(v), candidate);
+
+    if (static_cast<size_t>(count) > v.size() / 4) {
+      if (std::find(std::begin(out), std::end(out), candidate) ==
+          std::end(out)) {
+        out.push_back(candidate);
+      }
+    }
+  };
+
+  // There can be 3 candidates, check all of them
+  auto p1 = kthElement(v, 1 * v.size() / 4);
+  select(p1);
+
+  auto p2 = kthElement(v, 2 * v.size() / 4);
+  select(p2);
+
+  auto p3 = kthElement(v, 3 * v.size() / 4);
+  select(p3);
+
+  return out;
 }
 
 

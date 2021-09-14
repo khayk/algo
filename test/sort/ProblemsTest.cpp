@@ -55,7 +55,7 @@ TEST(SortProblemsTests, ComputeHIndex) {
 
 TEST(SortProblemsTests, MajorityElement) {
   std::vector<int> v = {1, 2, 5, 9, 5, 9, 5, 5, 5, 5};
-  
+
   int m = alg::majorityElement(v);
   EXPECT_EQ(m, 5);
 
@@ -70,4 +70,31 @@ TEST(SortProblemsTests, MajorityElement) {
   v = {4, 4, 1, 4, 4, 1, 1, 1, 4, 4};
   m = alg::majorityElement(v);
   EXPECT_EQ(m, 4);
+}
+
+
+TEST(SortProblemsTests, QuarterElements) {
+  std::vector<int> v;
+  std::vector<int> act;
+  std::vector<int> exp;
+
+  v = {1, 2, 5, 9, 5, 9, 5, 5, 5, 5};
+  exp = {5};
+  act = alg::quarterElements(v);
+  EXPECT_EQ(act, exp);
+
+  v = {1, 1, 3, 2, 1, 2, 1, 2, 2, 1, 1};
+  act = alg::quarterElements(v);
+  exp = {1, 2};
+  EXPECT_EQ(act, exp);
+
+  v = {0, 1, 0, 2, 1, 2, 2, 2, 1, 0, 1, 0};
+  act = alg::quarterElements(v);
+  exp = {0, 1, 2};
+  EXPECT_EQ(act, exp);
+
+  v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
+  act = alg::quarterElements(v);
+  exp = {};
+  EXPECT_EQ(act, exp);
 }

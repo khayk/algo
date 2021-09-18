@@ -2,6 +2,8 @@
 
 #include <vector>
 
+namespace alg {
+
 template <typename T>
 using Array = std::vector<T>;
 
@@ -14,4 +16,4 @@ using MatrixInts = Matrix<int>;
 using ArrayChars = Array<char>;
 using MatrixChars = Matrix<char>;
 
-
+}  // namespace alg

@@ -118,6 +118,8 @@ uint32_t computeHIndex(std::vector<uint32_t>& citations);
  * the elements that appear more than n/2 times in the list. If such an element
  * doesn't exists, returns the minimum value of type T.
  *
+ * @refs skiena 4-11
+ *
  * @return The element, that appears more then n/2 times
  */
 template <typename T>
@@ -151,6 +153,8 @@ T majorityElement(const std::vector<T>& elems)
 /**
  * @brief  Design an O(n) algorithm that, given a list of n elements, finds all
  * the elements that appear more than n/4 times.
+ *
+ * @refs skiena 4-11
  *
  * @return The element, that appears more then n/4 times
  */

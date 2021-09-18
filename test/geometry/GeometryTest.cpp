@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
 #include "geometry/Geometry.h"
+
+#include <gtest/gtest.h>
 
 #include <random>
 #include <array>

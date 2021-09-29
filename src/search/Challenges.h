@@ -27,6 +27,32 @@ T maxInSortedRightShifted(const std::vector<T>& a, int k)
   return a[k + a.size() - 1];
 }
 
+
+template <typename T>
+int findRotation(const std::vector<T>& a) {
+  int n = static_cast<int>(a.size());
+  int low = 0;
+  int high = n - 1;
+
+  while (low < high) {
+    int mid = (low + high) / 2;
+
+    // Check if element (mid+1) is minimum element.
+    if (mid < high && a[mid + 1] < a[mid]) return (mid + 1);
+
+    // Check if mid itself is minimum element
+    if (mid > low && a[mid] < a[mid - 1]) return mid;
+
+    if (a[high] > a[mid]) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return low;
+}
+
 /**
  * @brief Give an O(lg n) algorithm to find the largest number in A
  *
@@ -41,21 +67,9 @@ T maxInSortedRightShifted(const std::vector<T>& a)
     throw std::runtime_error("Provide a non-empty array.");
   }
 
-  int l = 0;
-  int r = static_cast<int>(a.size()) - 1;
+  int k = findRotation(a);
 
-  while (l < r) {
-    int mid = (l + r) / 2;
-    int off = a[l] > a[r] ? 0 : 1;
-
-    if (a[l] < a[mid]) {
-      l = mid + off;
-    } else {
-      r = mid + off;
-    }
-  }
-
-  return a[l];
+  return maxInSortedRightShifted(a, k);
 }
 
 }  // namespace alg

@@ -8,7 +8,7 @@
 using namespace alg;
 
 TEST(SearchChallengesTests, MaxInSortedRightShiftedKnownK) {
-  ArrayInts a{1, 3, 4, 5, 8, 10, 17};
+  ArrayInts a{1, 3, 4, 5, 8, 10, 10, 17};
   const auto max = a.back();
 
   int n = static_cast<int>(a.size());
@@ -22,7 +22,7 @@ TEST(SearchChallengesTests, MaxInSortedRightShiftedKnownK) {
 
 
 TEST(SearchChallengesTests, MaxInSortedRightShiftedUnknownK) {
-  ArrayInts a{1, 3, 4, 5, 8, 10, 17};
+  ArrayInts a{1, 3, 4, 5, 8, 10, 10, 17};
   const auto max = a.back();
 
   int n = static_cast<int>(a.size());

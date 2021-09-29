@@ -53,6 +53,7 @@ TEST(BinarySearchTests, UpperBound) {
   EXPECT_EQ(upperBound(a, 6), 5);
 }
 
+
 TEST(BinarySearchTests, Occurences) {
   ArrayInts a{1, 2, 2, 3, 3, 3, 4, 4, 4, 4};
 

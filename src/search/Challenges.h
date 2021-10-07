@@ -13,6 +13,8 @@ namespace alg {
  *
  * @param a Sorted array A of size n that has been circularly shifted k positions to the right.
  *
+ * @refs skiena 5-1
+ *
  * @return The max element
  */
 template <typename T>
@@ -58,6 +60,8 @@ int findRotation(const std::vector<T>& a) {
  *
  * @param a Sorted array A of size n that has been circularly shifted k positions to the right.
  *
+ * @refs skiena 5-1
+ *
  * @return The max element
  */
 template <typename T>
@@ -70,6 +74,44 @@ T maxInSortedRightShifted(const std::vector<T>& a)
   int k = findRotation(a);
 
   return maxInSortedRightShifted(a, k);
+}
+
+
+/**
+ * @brief A sorted array of size n contains distinct integers between 1 and
+ * n + 1, with one element missing. Give an O(log n) algorithm to find the missing
+ * integer, without using any extra space.
+ *
+ * @param a  A sorted array of size n with distinct integers between 1 and n + 1
+ *
+ * @return
+ */
+template <typename T>
+T missingInSortedArray(const std::vector<T>& a)
+{
+  if (a.empty()) {
+    throw std::runtime_error("Provide a non-empty array.");
+  }
+
+  int n = static_cast<int>(a.size());
+  int l = 0;
+  int h = n - 1;
+
+  while (l < h) {
+    int m = (l + h) / 2;
+
+    if (a[m] - m == 1) {
+      l = m + 1;
+    } else {
+      h = m;
+    }
+  }
+
+  if (a[l] - l == 1) {
+    return a[l] + 1;
+  }
+
+  return a[l] - 1;
 }
 
 }  // namespace alg

@@ -31,3 +31,23 @@ TEST(SearchChallengesTests, MaxInSortedRightShiftedUnknownK) {
     EXPECT_EQ(maxInSortedRightShifted(a), max);
   }
 }
+
+
+TEST(SearchChallengesTests, MissingInSortedArray) {
+  ArrayInts a{1, 2, 4, 5};
+
+  constexpr int n = 10;
+  a.resize(n);
+
+  for (int i = 0; i <= n; ++i) {
+    for (int j = 0; j < n; ++j) {
+      a[j] = j + 1;
+
+      if (j >= i) {
+        ++a[j];
+      }
+    }
+
+    EXPECT_EQ(missingInSortedArray(a), i + 1);
+  }
+}

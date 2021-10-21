@@ -16,7 +16,7 @@ template <> const float Math<float>::kRadToDeg = 180.0f / Math<float>::kPi;
 
 template <> const double Math<double>::kEpsilon = 1e-12f;
 template <> const double Math<double>::kZeroTolerance = 1e-08;
-template <> const double Math<double>::kPi = static_cast<double>(4.0 * atan(1.0));
+template <> const double Math<double>::kPi = 4.0 * atan(1.0);
 template <> const double Math<double>::kTwoPi = 2.0 * Math<double>::kPi;
 template <> const double Math<double>::kHalfPi = 0.5 * Math<double>::kPi;
 template <> const double Math<double>::kInvPi = 1.0 / Math<double>::kPi;

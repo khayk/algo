@@ -10,7 +10,7 @@ class Vector2 : public Tuple2<Real> {
  public:
   Vector2() noexcept = default;
   Vector2(Real x, Real y) noexcept;
-  Vector2(const Tuple2<Real>& t) noexcept;
+  explicit Vector2(const Tuple2<Real>& t) noexcept;
   Vector2(const Vector2& v) noexcept = default;
 
   /** 
@@ -63,8 +63,8 @@ Vector2<Real> operator*(const Real scalar, const Vector2<Real>& v) noexcept;
 template <typename Real>
 std::ostream& operator<<(std::ostream& out, const Vector2<Real>& v);
 
-typedef Vector2<float> Vector2f;
-typedef Vector2<double> Vector2d;
+using Vector2f = Vector2<float>;
+using Vector2d = Vector2<double> ;
 
 }  // namespace alg
 

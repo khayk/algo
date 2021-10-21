@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
 #include "Utils.h"
-#include "search/Challenges.h"
+#include "search/Problems.h"
 
 #include <algorithm>
 
 using namespace alg;
 
-TEST(SearchChallengesTests, MaxInSortedRightShiftedKnownK) {
+TEST(SearchProblemsTests, MaxInSortedRightShiftedKnownK) {
   ArrayInts a{1, 3, 4, 5, 8, 10, 10, 17};
   const auto max = a.back();
 
@@ -21,7 +21,7 @@ TEST(SearchChallengesTests, MaxInSortedRightShiftedKnownK) {
 }
 
 
-TEST(SearchChallengesTests, MaxInSortedRightShiftedUnknownK) {
+TEST(SearchProblemsTests, MaxInSortedRightShiftedUnknownK) {
   ArrayInts a{1, 3, 4, 5, 8, 10, 10, 17};
   const auto max = a.back();
 
@@ -33,7 +33,7 @@ TEST(SearchChallengesTests, MaxInSortedRightShiftedUnknownK) {
 }
 
 
-TEST(SearchChallengesTests, MissingInSortedArray) {
+TEST(SearchProblemsTests, MissingInSortedArray) {
   ArrayInts a{1, 2, 4, 5};
 
   constexpr int n = 10;
@@ -50,4 +50,15 @@ TEST(SearchChallengesTests, MissingInSortedArray) {
 
     EXPECT_EQ(missingInSortedArray(a), i + 1);
   }
+}
+
+
+TEST(SearchProblemsTests, DISABLED_MedianOfSortedArrays) {
+  ArrayInts a{1, 3, 5, 7};
+  ArrayInts b{9, 11, 17, 19, 19};
+
+  EXPECT_EQ(medianOfSortedArrays(a, b), 9);
+
+  b = {2, 4, 6};
+  EXPECT_EQ(medianOfSortedArrays(a, b), 4);
 }

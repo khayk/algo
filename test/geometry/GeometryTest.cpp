@@ -32,7 +32,7 @@ TEST(GeometryTests, LineContainsPoint) {
 
 TEST(GeometryTests, LineContainsPointRandom) {
   std::random_device rd;
-  std::uniform_int_distribution<int> distrib(-1000000, 1000000);
+  std::uniform_int_distribution distrib(-1000000, 1000000);
   std::array<double, 4> rnd{};
   for (auto& r : rnd) {
     r = static_cast<double>(distrib(rd));

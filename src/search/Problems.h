@@ -114,4 +114,40 @@ T missingInSortedArray(const std::vector<T>& a)
   return a[l] - 1;
 }
 
+
+/**
+ * @brief Given two sorted arrays A and B of size n and m respectively, find the
+ * median of the n + m elements. The overall run time complexity should be
+ * O(log(m + n)).
+ *
+ * @param a  Array of size n
+ * @param b  Array of size m
+ *
+ * @refs skiena 5-8:[5]
+ *
+ * @return The median of the n + m elements
+ */
+template <typename T>
+T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
+{
+  std::ignore = a;
+  std::ignore = b;
+  //int an = static_cast<int>(a.size());
+  //int la = 0;
+  //int ha = an - 1;
+
+  //int bn = static_cast<int>(b.size());
+  //int lb = 0;
+  //int hb = bn - 1;
+
+  //int m = (an + ab) / 2 - 1;
+
+  //while (la + lb != m) {
+
+  //}
+
+  return T();
+}
+
+
 }  // namespace alg

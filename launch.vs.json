@@ -1,0 +1,13 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "name": "algo-test.exe (test\\algo-test.exe)",
+      "project": "CMakeLists.txt",
+      "projectTarget": "algo-test.exe (test\\algo-test.exe)",
+      "args": [ "--gtest_filter=*Random* --gtest_repeat=1" ]
+    }
+  ]
+}

@@ -1,3 +1,8 @@
+# Topic
+
+* Overall topics
+
+```txt
 algo\
     src\
         array\
@@ -24,7 +29,7 @@ algo\
             SingleLinkedList.h
         queue\
         randomized\
-        recursion\ 
+        recursion\
         search\
         sort\
         stack\
@@ -41,27 +46,19 @@ algo\
         uncategorized\
         util\
     test\
+```
 
+* Comments
+
+```cpp
 /**
  * @breif Description of the problem
  *
  * @note The problem can be found in HackerRank, Skienna, Sedgwick, Google,
- *         {hard}, {hackerrank}, {dailycoding}, {skiena}, {sedgewick}, {google}, {amazon}
+ * {hard}, {hackerrank}, {dailycoding}, {skiena}, {sedgewick}, {google}, {amazon}
  *
  * @marls "google"
+ * @hard
+ * @medium
  */
-@hard
-@medium
-
-
-id, start
-id, end
-timeout
-1, 1
-2, 1
-
-
-1 2 5 10
-3 6 60
-
-1 2 3 5 6 10 60
+```

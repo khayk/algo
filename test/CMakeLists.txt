@@ -1,5 +1,7 @@
 file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cpp)
 
+include(../cmake/filters.cmake)
+
 # enable_testing()
 
 add_executable(${projectTest} ${TEST_SOURCES})

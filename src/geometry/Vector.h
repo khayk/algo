@@ -13,7 +13,7 @@ class Vector2 : public Tuple2<Real> {
   explicit Vector2(const Tuple2<Real>& t) noexcept;
   Vector2(const Vector2& v) noexcept = default;
 
-  /** 
+  /**
    * @brief  Coordinate access.
    */
   Real x() const noexcept;
@@ -21,7 +21,7 @@ class Vector2 : public Tuple2<Real> {
   Real& x() noexcept;
   Real& y() noexcept;
 
-  /** 
+  /**
    * @brief  Arithmetic operations.
    */
   Vector2 operator+(const Vector2& v) const noexcept;
@@ -30,7 +30,7 @@ class Vector2 : public Tuple2<Real> {
   Vector2 operator/(Real scalar) const noexcept;
   Vector2 operator-() const noexcept;
 
-  /** 
+  /**
    * @brief  Arithmetic updates.
    */
   Vector2& operator+=(const Vector2& v) noexcept;

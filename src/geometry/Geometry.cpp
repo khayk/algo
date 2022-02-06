@@ -1,5 +1,6 @@
 #include "Geometry.h"
 #include "Math.h"
+#include <cmath>
 
 namespace alg {
 
@@ -27,7 +28,7 @@ IntersectionType intersect(const Line2<Real>& l0, const Line2<Real> l1,
 {
   IntersectionType type{IntersectionType::kEmpty};
 
-  reutrn type;
+  return type;
 }
 
 // Force template instantiation for the type double

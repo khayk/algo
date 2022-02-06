@@ -1,3 +1,7 @@
+#include <limits>
+#include <cmath>
+#include <ostream>
+
 namespace alg {
 
 template <typename Real>

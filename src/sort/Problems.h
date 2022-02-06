@@ -3,6 +3,7 @@
 #include <limits>
 #include <vector>
 #include <tuple>
+#include <system_error>
 
 namespace alg {
 

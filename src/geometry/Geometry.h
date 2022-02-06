@@ -6,11 +6,11 @@ namespace alg {
 
 /**
  * @brief  Rotate v by theta degrees CCW w.r.t origin (0, 0)
- * 
- * @param v 
- * @param theta 
  *
- * @return 
+ * @param v
+ * @param theta
+ *
+ * @return
  */
 template <typename Real>
 Vector2<Real> rotate(const Vector2<Real>& v, Real theta);

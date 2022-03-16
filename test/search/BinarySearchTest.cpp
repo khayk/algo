@@ -20,6 +20,21 @@ TEST(BinarySearchTests, BinarySearch) {
 }
 
 
+TEST(BinarySearchTests, BinarySearch2) {
+  ArrayInts a{1, 3, 4, 5, 8, 10, 17};
+
+  EXPECT_FALSE(binarySearch2(a, 2));
+  EXPECT_FALSE(binarySearch2(a, -1));
+  EXPECT_FALSE(binarySearch2(a, 6));
+  EXPECT_FALSE(binarySearch2(a, 15));
+  EXPECT_FALSE(binarySearch2(a, 37));
+
+  for (const auto& i : a) {
+    EXPECT_TRUE(binarySearch2(a, i)) << i << " was not found";
+  }
+}
+
+
 TEST(BinarySearchTests, LowerBound) {
   ArrayInts a{1, 4, 4, 5};
 

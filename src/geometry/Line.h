@@ -19,8 +19,8 @@ class Line2 {
   Vector2<Real> dir;
 };
 
-typedef Line2<float> Line2f;
-typedef Line2<double> Line2d;
+using Line2f = Line2<float>;
+using Line2d = Line2<double>;
 
 }  // namespace alg
 

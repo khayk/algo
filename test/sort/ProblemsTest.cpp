@@ -1,5 +1,6 @@
-#include "sort/Problems.h"
 #include <gtest/gtest.h>
+#include "sort/Problems.h"
+
 #include <algorithm>
 
 TEST(SortProblemsTests, Partition) {

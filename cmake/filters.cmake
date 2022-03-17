@@ -39,3 +39,9 @@ file(GLOB sort
     "sort/*.cpp"
 )
 source_group("sort" FILES ${sort})
+
+file(GLOB stack
+    "stack/*.h"
+    "stack/*.cpp"
+)
+source_group("stack" FILES ${stack})

@@ -17,13 +17,13 @@ namespace alg {
  */
 
 template <typename T>
-int maximumSubarraySum(const std::vector<T>& a) {
+int maximumSubarraySum(const std::vector<T>& arr) {
   static_assert(std::is_integral_v<T>, "T must integer type");
 
   T best{}, sum{};
 
-  for (const auto& i: a) {
-    sum = std::max(i, sum + i);
+  for (const auto& a: arr) {
+    sum = std::max(a, sum + a);
     best = std::max(best, sum);
   }
 

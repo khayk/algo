@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 #include <type_traits>
 
 namespace alg {
@@ -28,5 +29,13 @@ int maximumSubarraySum(const std::vector<T>& a) {
 
   return best;
 }
+
+
+/**
+ * @brief  Is valid sudoku
+ * @param board The board of size 9x9 with some numbers.
+ * @return true, if the invariance of the sudoku rules is not violated, otherwise false
+ */
+bool isValidSudoku(const std::vector<std::vector<char>>& board);
 
 }  // namespace alg

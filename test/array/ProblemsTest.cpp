@@ -43,3 +43,28 @@ TEST(ArrayProblemsTests, IsValidSudoku) {
 
   EXPECT_FALSE(isValidSudoku(board));
 }
+
+
+TEST(ArrayProblemsTests, LargestTripleProducts) {
+  std::vector<int> arr;
+  std::vector<int> act;
+  std::vector<int> exp;
+
+  arr = {1, 2, 3, 4, 5};
+  exp = {-1, -1, 6, 24, 60};
+  act = largestTripleProducts(arr);
+
+  EXPECT_EQ(act, exp);
+
+  arr = {2, 4, 7, 1, 5, 3};
+  exp = {-1, -1, 56, 56, 140, 140};
+  act = largestTripleProducts(arr);
+
+  EXPECT_EQ(act, exp);
+
+  arr = {10, 1, 1, 1};
+  exp = {-1, -1, 10, 10};
+  act = largestTripleProducts(arr);
+
+  EXPECT_EQ(act, exp);
+}

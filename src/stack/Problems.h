@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 namespace alg {
 
@@ -37,5 +38,25 @@ bool validateStackSequences(const std::vector<int>& pushed,
  * @ref @facebook
  */
 std::vector<int> countSubarrays(const std::vector<int>& arr);
+
+
+/**
+ * @brief  A bracket is any of the following characters: (, ), {, }, [, or ].
+ *
+ * A sequence of brackets is said to be balanced if the following conditions are
+ * met:
+ *    - The sequence is empty, or
+ *    - The sequence is composed of two or more non-empty sequences, all of
+ * which are balanced, or
+ *    - The first and last brackets of the sequence are matching, and the
+ * portion of the sequence without the first and last elements is balanced.
+ *
+ * Determine whether each sequence of brackets is balanced
+ *
+ * @param str  An input string
+ *
+ * @return  true If a string is balanced, otherwise, false
+ */
+bool isBracketsBalanced(const std::string_view str);
 
 }  // namespace alg

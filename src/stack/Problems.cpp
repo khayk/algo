@@ -59,4 +59,54 @@ std::vector<int> countSubarrays(const std::vector<int>& arr) {
 }
 
 
+// Put helper function inside namespace to prevent us from linking issues in the
+// long run
+namespace {
+
+bool isOpeningBracket(const char bracket) {
+  switch (bracket) {
+    case '(':
+    case '{':
+    case '[':
+      return true;
+    default:
+      return false;
+  }
+}
+
+char matchingPair(const char bracket) {
+  switch (bracket) {
+    case '(':
+      return ')';
+    case '{':
+      return '}';
+    case '[':
+      return ']';
+    default:
+      return bracket;
+  }
+}
+
+} // namespace
+
+
+bool isBracketsBalanced(const std::string_view str) {
+  std::stack<char> openings;
+
+  for (const auto ch : str) {
+    if (isOpeningBracket(ch)) {
+      openings.push(ch);
+    } else {
+      if (openings.empty() || ch != matchingPair(openings.top())) {
+        return false;
+      }
+
+      openings.pop();
+    }
+  }
+
+  return openings.empty();
+}
+
+
 }  // namespace alg

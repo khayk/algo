@@ -1,8 +1,6 @@
 #include <gtest/gtest.h>
 #include "queue/Problems.h"
 
-//#include <algorithm>
-
 using namespace alg;
 
 TEST(QueueProblemsTests, QueueRemovals) {

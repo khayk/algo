@@ -62,3 +62,18 @@ TEST(SearchProblemsTests, DISABLED_MedianOfSortedArrays) {
   b = {2, 4, 6};
   EXPECT_EQ(medianOfSortedArrays(a, b), 4);
 }
+
+
+TEST(SearchProblemsTests, GetBillionUsersDay) {
+  std::vector<float> a{1.5f};
+  EXPECT_EQ(getBillionUsersDay(a), 52);
+
+  a = {1.1f, 1.2f, 1.3f};
+  EXPECT_EQ(getBillionUsersDay(a), 79);
+
+  a = {1.01f, 1.02f};
+  EXPECT_EQ(getBillionUsersDay(a), 1047);
+
+  a = std::vector<float>(1000, 1.00001f);
+  EXPECT_EQ(getBillionUsersDay(a), 1379685);
+}

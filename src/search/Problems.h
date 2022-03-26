@@ -150,4 +150,49 @@ T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
 }
 
 
+/**
+ * @brief  We have N different apps with different user growth rates. At a given
+ * time t, measured in days, the number of users using an app is g^t (for
+ * simplicity we'll allow fractional users), where g is the growth rate for that
+ * app. These apps will all be launched at the same time and no user ever uses
+ * more than one of the apps. We want to know how many total users there are
+ * when you add together the number of users from each app.
+ *
+ * @param growthRates The input containing grow rates
+ *
+ * @return The number of full days required to we have 1 billion total users
+ * across the N apps.
+ *
+ * @refs facebook
+ */
+int getBillionUsersDay(const std::vector<float>& growthRates) {
+  const auto fn = [&growthRates](int days) {
+    long double s = 0;
+
+    for (const auto& v : growthRates) {
+      long double x = v;
+      s += pow(x, days);
+    }
+
+    return s;
+  };
+
+  long double target = 10e8;
+
+  int maxDays = 1;
+  while (fn(maxDays) < target) {
+    maxDays *= 2;
+  }
+
+  int days = 0;
+
+  for (int j = maxDays / 2; j > 0; j /= 2) {
+    if (days + j < maxDays && fn(days + j) < target) {
+      days += j;
+    }
+  }
+
+  return days + 1;
+}
+
 }  // namespace alg

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <vector>
 
 namespace alg {
 
@@ -132,19 +133,6 @@ T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
 {
   std::ignore = a;
   std::ignore = b;
-  //int an = static_cast<int>(a.size());
-  //int la = 0;
-  //int ha = an - 1;
-
-  //int bn = static_cast<int>(b.size());
-  //int lb = 0;
-  //int hb = bn - 1;
-
-  //int m = (an + ab) / 2 - 1;
-
-  //while (la + lb != m) {
-
-  //}
 
   return T();
 }
@@ -165,34 +153,24 @@ T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
  *
  * @refs facebook
  */
-int getBillionUsersDay(const std::vector<float>& growthRates) {
-  const auto fn = [&growthRates](int days) {
-    long double s = 0;
+int getBillionUsersDay(const std::vector<float>& growthRates);
 
-    for (const auto& v : growthRates) {
-      long double x = v;
-      s += pow(x, days);
-    }
 
-    return s;
-  };
-
-  long double target = 10e8;
-
-  int maxDays = 1;
-  while (fn(maxDays) < target) {
-    maxDays *= 2;
-  }
-
-  int days = 0;
-
-  for (int j = maxDays / 2; j > 0; j /= 2) {
-    if (days + j < maxDays && fn(days + j) < target) {
-      days += j;
-    }
-  }
-
-  return days + 1;
-}
+/**
+ * @brief  Given an array of integers (which may include repeated integers),
+ * determine if there's a way to split the array into two subsequences A and B
+ * such that the sum of the integers in both arrays is the same, and all of the
+ * integers in A are strictly smaller than all of the integers in B.
+ *
+ * Note: Strictly smaller denotes that every integer in A must be less than, and
+ * not equal to, every integer in B.
+ *
+ * @param arr An input array
+ *
+ * @return  Return true if such a split is possible, and false otherwise.
+ *
+ * @refs facebook
+ */
+bool balancedSplitExists(const std::vector<int>& arr);
 
 }  // namespace alg

@@ -1,24 +1,9 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace alg {
-
-void encryptWordHelper(const std::string_view s, std::string& result) {
-  if (s.size() <= 2) {
-    result.append(s);
-    return;
-  }
-
-  size_t middle = s.size() / 2;
-  if (s.size() % 2 == 0) {
-    --middle;
-  }
-
-  result.push_back(s[middle]);
-  encryptWordHelper(s.substr(0, middle), result);
-  encryptWordHelper(s.substr(middle + 1), result);
-}
 
 /**
  * @brief  Returns an encryped version of s.
@@ -38,12 +23,23 @@ void encryptWordHelper(const std::string_view s, std::string& result) {
  *
  * @refs facebook
  */
-std::string findEncryptedWord(const std::string& s) {
-  std::string result;
-  result.reserve(s.size());
-  encryptWordHelper(s, result);
+std::string findEncryptedWord(const std::string& s);
 
-  return result;
-}
+
+/**
+ * @brief  Given a list of the available denominations, determine if it's
+ * possible to receive exact change for an amount of money targetMoney.
+ *
+ * @param targetMoney  The target money
+ * @param denominations  The denomirations
+ *
+ * 1 <= |denominations| <= 100
+ * 1 <= denominations[i] <= 10,000
+ * 1 <= targetMoney <= 1,000,000
+ *
+ * @return true if it's possible to receive exactly targetMoney given the
+ * available denominations, and false if not.
+ */
+bool canGetExactChange(const int targetMoney, const std::vector<int>& denominations);
 
 }  // namespace alg

@@ -189,4 +189,21 @@ std::vector<T> quarterElements(const std::vector<T>& elems) {
 }
 
 
+/**
+ * @brief  Given an array of integers (which may include repeated integers),
+ * determine if there's a way to split the array into two subsequences A and B
+ * such that the sum of the integers in both arrays is the same, and all of the
+ * integers in A are strictly smaller than all of the integers in B.
+ *
+ * Note: Strictly smaller denotes that every integer in A must be less than, and
+ * not equal to, every integer in B.
+ *
+ * @param arr An input array
+ *
+ * @return  Return true if such a split is possible, and false otherwise.
+ *
+ * @refs facebook
+ */
+bool balancedSplitExists(const std::vector<int>& arr);
+
 }  // namespace alg

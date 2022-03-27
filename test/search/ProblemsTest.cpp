@@ -77,20 +77,3 @@ TEST(SearchProblemsTests, GetBillionUsersDay) {
   a = std::vector<float>(1000, 1.00001f);
   EXPECT_EQ(getBillionUsersDay(a), 1379685);
 }
-
-
-TEST(SearchProblemsTests, BalancedSplitExists) {
-  std::vector<int> arr;
-
-  arr = {2, 1, 2, 5};
-  EXPECT_EQ(balancedSplitExists(arr), true);
-
-  arr = {3, 6, 3, 4, 4};
-  EXPECT_EQ(balancedSplitExists(arr), false);
-
-  arr = {1, 5, 7, 1};
-  EXPECT_EQ(balancedSplitExists(arr), true);
-
-    arr = {12, 7, 6, 7, 6};
-  EXPECT_EQ(balancedSplitExists(arr), false);
-}

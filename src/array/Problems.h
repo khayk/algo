@@ -104,4 +104,28 @@ std::vector<T> largestTripleProducts(const std::vector<T>& arr) {
   return out;
 }
 
+
+/**
+ * @brief  A family of frogs in a pond are traveling towards dry land to
+ *         hibernate. They hope to do so by hopping across a trail of N lily
+ * pads, numbered from 1 to N in order.  There are F frogs, numbered from 1 to
+ * F. Frog [i] is currently perched atop lily pad P[i]. No two frogs are
+ * currently on the  same lily pad. Lily pad N is right next to the shore, and
+ * none of the frogs are  initially on lily pad N. Each second, one frog may hop
+ * along the trail towards lily pad N. When a frog hops, it moves to the nearest
+ * lily pad after its current lily pad which is not currently occupied by
+ * another frog (hopping over any other frogs on intermediate lily pads along
+ * the way). If this causes it to reach lily pad NN, it will immediately exit
+ * onto the shore. Multiple frogs may not simultaneously hop during the same
+ * second.
+ *
+ * @param numPads  Number of total pads (2 <= N <= 10^12)
+ * @param frogs  Pads number where frog i resides initially (1 <= F <= 500000)
+ *
+ * @return  Minimum number of seconds required for all frogs to reach the shore
+ *
+ * @ref @facebook
+ */
+int64_t minimumHops(int64_t numPads, std::vector<int64_t> frogs);
+
 }  // namespace alg

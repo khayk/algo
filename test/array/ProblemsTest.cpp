@@ -68,3 +68,21 @@ TEST(ArrayProblemsTests, LargestTripleProducts) {
 
   EXPECT_EQ(act, exp);
 }
+
+
+TEST(ArrayProblemsTests, MinimumHops) {
+  std::vector<int64_t> arr;
+  int64_t n = 0;
+
+  n = 3;
+  arr = {1};
+  EXPECT_EQ(minimumHops(n, arr), 2);
+
+  n = 6;
+  arr = {5, 2, 4};
+  EXPECT_EQ(minimumHops(n, arr), 4);
+
+  n = 20;
+  arr = {3, 4, 5, 8, 9, 13, 14, 16};
+  EXPECT_EQ(minimumHops(n, arr), 17);
+}

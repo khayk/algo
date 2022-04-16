@@ -30,7 +30,7 @@ TEST(TreeTests, Construct) {
 
 TEST(TreeTests, Dfs)
 {
-  auto* root = createTNode(
+  const auto* root = createTNode(
       1, {createTNode(2,
                       {
                           createTNode(4, {createTNode(5),

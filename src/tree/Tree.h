@@ -86,7 +86,7 @@ public:
 
   ~TNode() {
     while (!children_.empty()) {
-      deleteTNode(children_.back());
+      deleteTNode<T>(children_.back());
       children_.pop_back();
     }
   }
@@ -209,12 +209,12 @@ void levelOrderTraversal(const TNode<T>* root, const Fn& visited) {
   }
 }
 
+
 enum class NodeState : int32_t {
   None,
   Discovered,
   Visited
 };
-
 
 
 template <typename T, typename Fn>

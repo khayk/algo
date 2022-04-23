@@ -20,8 +20,6 @@ namespace alg {
  *
  * @param s An input string
  * @return An encrypted version of the string
- *
- * @refs facebook
  */
 std::string findEncryptedWord(const std::string& s);
 

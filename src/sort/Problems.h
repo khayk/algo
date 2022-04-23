@@ -201,8 +201,6 @@ std::vector<T> quarterElements(const std::vector<T>& elems) {
  * @param arr An input array
  *
  * @return  Return true if such a split is possible, and false otherwise.
- *
- * @refs facebook
  */
 bool balancedSplitExists(const std::vector<int>& arr);
 

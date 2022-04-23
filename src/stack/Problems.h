@@ -34,8 +34,6 @@ bool validateStackSequences(const std::vector<int>& pushed,
  *
  * @return An array where each index i contains an integer denoting the maximum
  *         number of contiguous subarrays of arr[i]
- *
- * @ref @facebook
  */
 std::vector<int> countSubarrays(const std::vector<int>& arr);
 

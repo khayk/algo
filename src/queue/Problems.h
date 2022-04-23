@@ -29,8 +29,6 @@ namespace alg {
  * @param x
  *
  * @return The array of indices that will be removed
- *
- * @refs facebook
  */
 std::vector<int> findPositions(const std::vector<int>& arr, int x) {
   std::vector<int> output;

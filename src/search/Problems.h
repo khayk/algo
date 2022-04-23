@@ -150,8 +150,6 @@ T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
  *
  * @return The number of full days required to we have 1 billion total users
  * across the N apps.
- *
- * @refs facebook
  */
 int getBillionUsersDay(const std::vector<float>& growthRates);
 

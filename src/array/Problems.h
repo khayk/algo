@@ -63,8 +63,6 @@ const S& underlyingContainer(std::priority_queue<T, S, C>& q) {
  * arr[0..i] (or equal to -1 if i < 2, as arr[0..i] then includes fewer than
  * three elements)
  *
- * @ref @facebook (Largest Triple Products)
- *
  * @param arr An input array
  *
  * @return A list of n integers output[0..(n-1)], as described above.
@@ -123,8 +121,6 @@ std::vector<T> largestTripleProducts(const std::vector<T>& arr) {
  * @param frogs  Pads number where frog i resides initially (1 <= F <= 500000)
  *
  * @return  Minimum number of seconds required for all frogs to reach the shore
- *
- * @ref @facebook
  */
 int64_t minimumHops(int64_t numPads, std::vector<int64_t> frogs);
 

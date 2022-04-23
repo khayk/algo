@@ -16,8 +16,6 @@ namespace alg {
  * @param k The sum of pairs
  *
  * @return The number of different pairs of elements which sum to k.
- *
- * @ref @facebook
  */
 size_t numberOfWays(const std::vector<int>& arr, int k);
 

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "recursion/Problems.h"
+#include "Utils.h"
 
 using namespace alg;
 
@@ -30,4 +31,37 @@ TEST(RecursionProblemsTests, CanGetExactChange) {
   denominations = {3};
   targetMoney = 1000000;
   EXPECT_EQ(canGetExactChange(targetMoney, denominations), false);
+}
+
+
+TEST(RecursionProblemsTests, FindDinnerParties) {
+  std::vector<int> friends;
+  std::vector<int> answer;
+  std::vector<std::vector<int>> combinations;
+  size_t tableSize{};
+
+  auto mathAnswer = [&friends, &tableSize]() {
+    // n! / (k! * (n - k)!)
+    return factorial(friends.size()) /
+           (factorial(tableSize) * factorial(friends.size() - tableSize));
+  };
+
+  friends = {1, 2, 3};
+  tableSize = 2;
+  combinations = findDinnerParties(friends, tableSize);
+  ASSERT_EQ(combinations.size(), mathAnswer());
+
+  answer = {2, 3};
+  EXPECT_EQ(combinations[0], answer);
+  answer = {1, 3};
+  EXPECT_EQ(combinations[1], answer);
+  answer = {1, 2};
+  EXPECT_EQ(combinations[2], answer);
+
+
+  tableSize = 3;
+  combinations = findDinnerParties(friends, tableSize);
+  ASSERT_EQ(combinations.size(), mathAnswer());
+  answer = {1, 2, 3};
+  EXPECT_EQ(combinations[0], answer);
 }

@@ -40,4 +40,19 @@ std::string findEncryptedWord(const std::string& s);
  */
 bool canGetExactChange(const int targetMoney, const std::vector<int>& denominations);
 
+
+/**
+ * @brief  Given a table for N people. Figure out every possible seating of the
+ * table for all your friends
+ *
+ * @param friends  The array of friends
+ * @param tableSize  The size of the table
+ *
+ * @return All possible different seating combinations
+ *
+ * @ref Jackson Gabbard
+ */
+std::vector<std::vector<int>> findDinnerParties(const std::vector<int>& friends,
+                                                size_t tableSize);
+
 }  // namespace alg

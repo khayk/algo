@@ -45,6 +45,18 @@ size_t numDigits(T number)
 }
 
 
+inline size_t factorial(size_t number) {
+  size_t answer = 1;
+
+  while (number > 0) {
+    answer *= number;
+    --number;
+  }
+
+  return answer;
+}
+
+
 template <typename T>
 void output(const Array<T>& a, std::ostream& dest, size_t width = 0)
 {

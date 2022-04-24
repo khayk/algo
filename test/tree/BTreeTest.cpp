@@ -4,6 +4,7 @@
 #include <vector>
 
 using namespace alg;
+
 using Node = BTNode<int>;
 
 TEST(BinaryTreeTests, TreeFromArray) {

@@ -57,4 +57,28 @@ std::vector<int> countSubarrays(const std::vector<int>& arr);
  */
 bool isBracketsBalanced(const std::string_view str);
 
+
+/**
+ * @brief  Given a list logs, where logs[i] represents the i-th log message
+ *         formatted as a string "{function_id}:{"start" | "end"}:{timestamp}"
+ *
+ * @param n  Number of function
+ * @param logs  The log records
+ *
+ * Constraints:
+ *
+ *    1 <= n <= 100
+ *    1 <= logs.length <= 500
+ *    0 <= function_id < n
+ *    0 <= timestamp <= 109
+ *    No two start events will happen at the same timestamp.
+ *    No two end events will happen at the same timestamp.
+ *    Each function has an "end" log for each "start" log.
+ *
+ * @return  Return the exclusive time of each function in an array, where the
+ *          value at the ith index represents the exclusive time for the function
+ *          with ID i.
+ */
+std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs);
+
 }  // namespace alg

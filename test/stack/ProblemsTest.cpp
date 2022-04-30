@@ -54,3 +54,27 @@ TEST(StackProblemsTests, IsBracketsBalanced) {
   EXPECT_FALSE(isBracketsBalanced(")"));
   EXPECT_FALSE(isBracketsBalanced("("));
 }
+
+
+TEST(StackProblemsTests, ExclusiveTime) {
+  std::vector<int> exp;
+  std::vector<int> act;
+  std::vector<std::string> logs;
+
+  logs = {"0:start:0", "0:start:2", "0:end:5",
+          "0:start:6", "0:end:6",   "0:end:7"};
+  exp = {8};
+  act = exclusiveTime(1, logs);
+  EXPECT_EQ(act, exp);
+
+  logs = {"0:start:0", "0:start:2", "0:end:5",
+          "1:start:6", "1:end:6",   "0:end:7"};
+  exp = {7, 1};
+  act = exclusiveTime(2, logs);
+  EXPECT_EQ(act, exp);
+
+  logs = {"0:start:0", "1:start:2", "1:end:5", "0:end:6"};
+  exp = {3, 4};
+  act = exclusiveTime(2, logs);
+  EXPECT_EQ(act, exp);
+}

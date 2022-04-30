@@ -1,6 +1,7 @@
 #include "Problems.h"
 
 #include <stack>
+#include <charconv>
 
 namespace alg {
 
@@ -108,5 +109,55 @@ bool isBracketsBalanced(const std::string_view str) {
   return openings.empty();
 }
 
+
+std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs) {
+  struct Log {
+    int id{0};
+    int timestamp{0};
+  };
+
+  auto parse = [](std::string_view s, bool& isEnd) {
+    Log l;
+
+    auto p = s.find_first_of(':', 0);
+    auto tmp = s.substr(0, p);
+
+    std::from_chars(tmp.data(), tmp.data() + tmp.size(), l.id);
+    s.remove_prefix(p + 1);
+    p = s.find_first_of(':', 0);
+    tmp = s.substr(0, p);
+
+    if (tmp == "end") {
+      isEnd = true;
+    }
+
+    s.remove_prefix(p + 1);
+    std::from_chars(s.data(), s.data() + s.size(), l.timestamp);
+
+    return l;
+  };
+
+  std::stack<Log> st;
+  std::vector<int> times(n, 0);
+
+  for (const auto& log : logs) {
+    bool isEnd = false;
+    const auto l = parse(log, isEnd);
+
+    if (!isEnd) {
+      st.push(l);
+    } else {
+      int timeAdded = l.timestamp - st.top().timestamp + 1;
+      times[l.id] += timeAdded;
+      st.pop();
+
+      if (!st.empty()) {
+        times[st.top().id] -= timeAdded;
+      }
+    }
+  }
+
+  return times;
+}
 
 }  // namespace alg

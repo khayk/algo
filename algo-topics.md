@@ -17,12 +17,14 @@ algo\
             Point.h
             Polygon.h
             Vector.h
-        graph\
+        graph\  https://math.nist.gov/~RPozo/ngraph/
         greedy\
         hashing\
             HashTable.h
         heap\
             PriorityQueue.h
+            BinomialHeap.h
+            FibonacciHeap.h
         list\
             DoubleLinkedList.h
             ListProblems.h

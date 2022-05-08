@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
 #include "tree/BTree.h"
+
+#include <gtest/gtest.h>
 
 #include <vector>
 

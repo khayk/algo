@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 #include <vector>
+#include <tuple>
 
 namespace alg {
 

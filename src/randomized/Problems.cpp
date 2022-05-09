@@ -1,4 +1,5 @@
 #include "Problems.h"
+#include <limits>
 #include <array>
 
 namespace alg {

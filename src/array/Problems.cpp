@@ -1,4 +1,5 @@
 #include "Problems.h"
+#include <algorithm>
 
 namespace alg {
 
@@ -21,7 +22,10 @@ bool isValidSudoku(const std::vector<std::vector<char>>& board) {
       const auto squareRow = i / 3;
       const auto squareCol = j / 3;
 
-      if (rows[i][num]) return false;
+      if (rows[i][num]) {
+        return false;
+      }
+
       rows[i][num] = true;
 
       if (cols[j][num]) return false;

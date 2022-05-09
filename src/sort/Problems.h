@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <system_error>
+#include <algorithm>
 
 namespace alg {
 

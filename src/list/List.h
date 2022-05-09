@@ -6,6 +6,7 @@
 #include <list>
 #include <array>
 #include <string>
+#include <limits>
 
 namespace alg {
 
@@ -45,7 +46,7 @@ SNode<T>* appendNode(SNode<T>* curr, SNode<T>* node) {
 
 template <typename T>
 SNode<T>* append(SNode<T>* curr, const T& value) {
-  return appendNode(node, createNode(value));
+  return appendNode(curr, createNode(value));
 }
 
 

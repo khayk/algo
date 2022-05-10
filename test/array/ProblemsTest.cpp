@@ -86,3 +86,25 @@ TEST(ArrayProblemsTests, MinimumHops) {
   arr = {3, 4, 5, 8, 9, 13, 14, 16};
   EXPECT_EQ(minimumHops(n, arr), 17);
 }
+
+
+TEST(ArrayProblemsTests, CombinationSum) {
+  size_t numsCount = 0;
+  size_t targetSum = 0;
+  std::vector<std::vector<int>> combs;
+
+  numsCount = 3;
+  targetSum = 7;
+  combs = {{1, 2, 4}};
+  EXPECT_EQ(combinationSum(numsCount, targetSum), combs);
+
+  numsCount = 3;
+  targetSum = 9;
+  combs = {{1, 2, 6}, {1, 3, 5}, {2, 3, 4}};
+  EXPECT_EQ(combinationSum(numsCount, targetSum), combs);
+
+  numsCount = 4;
+  targetSum = 1;
+  combs.clear();
+  EXPECT_EQ(combinationSum(numsCount, targetSum), combs);
+}

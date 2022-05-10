@@ -1,4 +1,6 @@
 #include "Problems.h"
+#include "Types.h"
+
 #include <algorithm>
 
 namespace alg {
@@ -78,5 +80,41 @@ int64_t minimumHops(int64_t numPads, std::vector<int64_t> frogs) {
   return minimumSeconds;
 }
 
+namespace {
+
+using Combinations = std::vector<ArrayInts>;
+
+void combinationSum(const size_t i, const size_t k, const size_t n,
+                    const size_t sum, ArrayInts& comb, Combinations& res) {
+  if (sum > n || comb.size() > k) {
+    return;
+  }
+
+  if (sum == n && comb.size() == k) {
+    res.push_back(comb);
+    return;
+  }
+
+  for (int j = i; j < 10; ++j) {
+    if (sum + j > n) {
+      break;
+    }
+
+    comb.push_back(j);
+    combinationSum(j + 1, k, n, sum + j, comb, res);
+    comb.pop_back();
+  }
+}
+
+}  // namespace
+
+Combinations combinationSum(size_t numsCount, size_t targetSum) {
+  Combinations res;
+  ArrayInts comb;
+  size_t sum = 0;
+  combinationSum(1, numsCount, targetSum, sum, comb, res);
+
+  return res;
+}
 
 }  // namespace alg

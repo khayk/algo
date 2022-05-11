@@ -8,13 +8,12 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test/Debug/algo-test",
-            "args": [],
+            "program": "${workspaceFolder}/build/test/algo-test",
+            "args": ["--gtest_filter=*ContainsNearbyAlmostDuplicate*", "--gtest_repeat=1"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb"
+            "externalConsole": false
         }
     ]
 }

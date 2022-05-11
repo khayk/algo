@@ -14,7 +14,7 @@ namespace alg {
  * @return true if this could have been the result of a sequence of push and pop
  *         operations on an initially empty stack, or false otherwise.
  *
- * @ref @leetcode, @medium
+ * @ref leetcode
  */
 bool validateStackSequences(const std::vector<int>& pushed,
                             const std::vector<int>& popped);

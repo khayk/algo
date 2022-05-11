@@ -205,4 +205,26 @@ std::vector<T> quarterElements(const std::vector<T>& elems) {
  */
 bool balancedSplitExists(const std::vector<int>& arr);
 
+
+/**
+ * @brief  Given an integer array nums and two integers k and t, return true if
+ *         there are two distinct indices i and j in the array such that
+ *         `abs(nums[i] - nums[j]) <= t` and `abs(i - j) <= k`.
+ *
+ * @param nums  An input array
+ * @param k  An absolute distance of indices
+ * @param t  An absolute distance of values
+ *
+ * @constraints:
+ *    1 <= nums.length <= 2 * 10^4
+ *    -2^31 <= nums[i] <= 2^31 - 1
+ *    0 <= k <= 10^4
+ *    0 <= t <= 2^31 - 1
+ *
+ * @return true  if requested pair is found, false othewise
+ *
+ * @ref leetcode 220 Contains Duplicate III,
+ */
+bool containsNearbyAlmostDuplicate(std::vector<int>& nums, size_t k, size_t t);
+
 }  // namespace alg

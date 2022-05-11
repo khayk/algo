@@ -118,3 +118,20 @@ TEST(SearchProblemsTests, BalancedSplitExists) {
   arr = {12, 7, 6, 7, 6};
   EXPECT_EQ(balancedSplitExists(arr), false);
 }
+
+
+TEST(SearchProblemsTests, ContainsNearbyAlmostDuplicate) {
+  std::vector<int> arr;
+
+  arr = {1, 2, 3, 1};
+  EXPECT_TRUE(containsNearbyAlmostDuplicate(arr, 3, 0));
+
+  arr = {1, 5, 9, 1, 5, 9};
+  EXPECT_FALSE(containsNearbyAlmostDuplicate(arr, 2, 3));
+
+  arr = {1, 0, 1, 1};
+  EXPECT_TRUE(containsNearbyAlmostDuplicate(arr, 1, 2));
+
+  arr = {20, 13, 4, 49, 41, 32, 9, 18};
+  EXPECT_TRUE(containsNearbyAlmostDuplicate(arr, 30, 9));
+}

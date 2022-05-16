@@ -108,3 +108,17 @@ TEST(ArrayProblemsTests, CombinationSum) {
   combs.clear();
   EXPECT_EQ(combinationSum(numsCount, targetSum), combs);
 }
+
+
+TEST(ArrayProblemsTests, SpiralOrder) {
+  std::vector<std::vector<int>> matrix;
+  std::vector<int> order;
+
+  matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  order = {1, 2, 3, 6, 9, 8, 7, 4, 5};
+  EXPECT_EQ(spiralOrder(matrix), order);
+
+  matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+  order = {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7};
+  EXPECT_EQ(spiralOrder(matrix), order);
+}

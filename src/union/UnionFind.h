@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <cstddef>
 #include <cassert>
 
 namespace alg {
@@ -72,7 +73,7 @@ class UnionFind {
 
 
   size_t rank(const T x) const noexcept {
-    return ranks_[find(x)];
+    return rank_[find(x)];
   }
 };
 

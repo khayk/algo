@@ -117,4 +117,49 @@ Combinations combinationSum(size_t numsCount, size_t targetSum) {
   return res;
 }
 
+
+std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
+  int m = static_cast<int>(matrix.size());
+  int n = static_cast<int>(matrix[0].size());
+
+  std::vector<std::pair<int, int>> dirs = {
+      {0, 1},   // right
+      {1, 0},   // down
+      {0, -1},  // left
+      {-1, 0}   // up
+  };
+
+  int availRows = m - 1;
+  int availCols = n;
+  int i = 0;
+  int j = -1;
+  int d = 0;
+
+  size_t resultSize = m * n;
+  std::vector<int> ans;
+  ans.reserve(resultSize);
+
+  while (ans.size() < resultSize) {
+    for (int c = 0; c < availCols; ++c) {
+      i += dirs[d].first;
+      j += dirs[d].second;
+      ans.push_back(matrix[i][j]);
+    }
+
+    --availCols;
+    d = (d + 1) % 4;
+
+    for (int c = 0; c < availRows; ++c) {
+      i += dirs[d].first;
+      j += dirs[d].second;
+      ans.push_back(matrix[i][j]);
+    }
+
+    --availRows;
+    d = (d + 1) % 4;
+  }
+
+  return ans;
+}
+
 }  // namespace alg

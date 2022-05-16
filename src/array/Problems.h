@@ -128,23 +128,35 @@ int64_t minimumHops(int64_t numPads, std::vector<int64_t> frogs);
 
 
 /**
- * @brief Find all valid combinations of k numbers that sum up to n such that 
+ * @brief Find all valid combinations of k numbers that sum up to n such that
  *        the following conditions are true
  *
  * Constrains:
  *    Only numbers 1 through 9 are used.
  *    Each number is used at most once.
- * 
- * Return a list of all possible valid combinations. The list must not contain 
+ *
+ * Return a list of all possible valid combinations. The list must not contain
  * the same combination twice, and the combinations may be returned in any order.
  *
  * @param numsCount The combination size
- * @param targetSum 
+ * @param targetSum
  *
- * @return An array of arrays satisfying the requested condition 
- * 
+ * @return An array of arrays satisfying the requested condition
+ *
  * @ref leetcode 216. Combination Sum III
  */
 std::vector<std::vector<int>> combinationSum(size_t numsCount, size_t targetSum);
+
+
+/**
+ * @brief  Given an m x n matrix, return all elements of the matrix in spiral order.
+ *
+ * @param matrix
+ *
+ * @return std::vector<int>
+ *
+ * @ref leetcode 54. Spiral Matrix
+ */
+std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix);
 
 }  // namespace alg

@@ -95,12 +95,12 @@ void combinationSum(const size_t i, const size_t k, const size_t n,
     return;
   }
 
-  for (int j = i; j < 10; ++j) {
+  for (size_t j = i; j < 10; ++j) {
     if (sum + j > n) {
       break;
     }
 
-    comb.push_back(j);
+    comb.push_back(static_cast<int>(j));
     combinationSum(j + 1, k, n, sum + j, comb, res);
     comb.pop_back();
   }
@@ -119,8 +119,8 @@ Combinations combinationSum(size_t numsCount, size_t targetSum) {
 
 
 std::vector<int> spiralOrder(std::vector<std::vector<int>>& matrix) {
-  int m = static_cast<int>(matrix.size());
-  int n = static_cast<int>(matrix[0].size());
+  const auto m = static_cast<int>(matrix.size());
+  const auto n = static_cast<int>(matrix[0].size());
 
   std::vector<std::pair<int, int>> dirs = {
       {0, 1},   // right

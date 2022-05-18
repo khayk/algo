@@ -4,6 +4,7 @@
 #include <numeric>
 #include <queue>
 #include <iostream>
+#include <unordered_map>
 
 namespace alg {
 
@@ -52,14 +53,14 @@ bool balancedSplitExists(const std::vector<int>& arr) {
 }
 
 
-int64_t bucketId(int x, size_t w) {
+int64_t bucketId(int x, int64_t w) {
   return x < 0 ? (x + 1) / w - 1 : x / w;
 }
 
 
 bool containsNearbyAlmostDuplicate(std::vector<int>& nums, size_t k, size_t t) {
-  const auto w = static_cast<size_t>(static_cast<int64_t>(t) + 1);
-  std::unordered_map<size_t, int> d;
+  const auto w = static_cast<int64_t>(t) + 1;
+  std::unordered_map<size_t, int64_t> d;
 
   for (size_t i = 0; i < nums.size(); ++i) {
     auto m = bucketId(nums[i], w);

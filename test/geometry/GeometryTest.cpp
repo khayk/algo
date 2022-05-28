@@ -12,7 +12,7 @@ TEST(GeometryTests, VectorRotate) {
   Vector2d e{-3, 10};
 
   a = alg::rotate(a, 90.0);
-  EXPECT_TRUE((a - e).squaredLength() < alg::Math<double>::kEpsilon);
+  EXPECT_TRUE((a - e).squaredLength() < alg::Mathd::kEpsilon);
 }
 
 
@@ -43,11 +43,11 @@ TEST(GeometryTests, LineContainsPointRandom) {
   d.normalize();
   Line2d l{o, d};
   Vector2d v{o};
-  
+
   constexpr int iters = 50000;
   constexpr double range = 1000000.0;
   constexpr double step = 2 * range / static_cast<double>(iters);
-  
+
   int i = iters;
   double t = -range;
 

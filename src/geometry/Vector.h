@@ -11,7 +11,6 @@ class Vector2 : public Tuple2<Real> {
   Vector2() noexcept = default;
   Vector2(Real x, Real y) noexcept;
   explicit Vector2(const Tuple2<Real>& t) noexcept;
-  Vector2(const Vector2& v) noexcept = default;
 
   /**
    * @brief  Coordinate access.

@@ -1,6 +1,8 @@
 #include "Geometry.h"
 #include "Math.h"
+
 #include <cmath>
+#include <tuple>
 
 namespace alg {
 
@@ -26,6 +28,9 @@ template <typename Real>
 IntersectionType intersect(const Line2<Real>& l0, const Line2<Real> l1,
   Vector2<Real>& p)
 {
+  std::ignore = l0;
+  std::ignore = l1;
+  std::ignore = p;
   IntersectionType type{IntersectionType::kEmpty};
 
   return type;

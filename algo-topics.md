@@ -9,7 +9,6 @@ algo\
         bit\
         backtracking\
         combinatorial\
-        disjoint\
         dynamic\
         geometry\
             GeometryProblems.h
@@ -46,6 +45,7 @@ algo\
             TreeProblems.h
             Trie.h
         uncategorized\
+        union\
         util\
     test\
 ```

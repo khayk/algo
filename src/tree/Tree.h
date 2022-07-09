@@ -257,5 +257,4 @@ void dfs(const TNode<T>* root, const Fn& cb) {
   }
 }
 
-
 }  // namespace alg

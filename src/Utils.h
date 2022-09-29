@@ -23,7 +23,7 @@ inline void trimRight(std::string& str) {
 
 
 /**
- * @brief  Retruns the number of characters to represent given number
+ * @brief  Returns the number of characters to represent given number
  * @tparam T
  * @param number
  * @return

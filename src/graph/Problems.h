@@ -14,7 +14,6 @@ using Visited = std::unordered_set<std::string>;
 template <typename Cb>
 void dfs(const Graph& graph, const std::string& node, Visited& visited,
          Path& currentPath, const Cb& cb) {
-
   currentPath.push_back(node);
   cb(currentPath);
 
@@ -38,14 +37,25 @@ void dfs(const Graph& graph, const std::string& node, Visited& visited,
 
 void findPaths(const Graph& graph, const std::string& start,
                const std::string& destination, Paths& paths) {
-  Path path;
+  Path currentPath;
   Visited visited;
 
-  dfs(graph, start, visited, path,
-      [&destination, &paths](const Path& currentPath) {
-        if (!currentPath.empty() && currentPath.back() == destination) {
-          paths.push_back(currentPath);
+  std::unordered_map<std::string, std::unordered_set<std::string>> hoops;
+
+  dfs(graph, start, visited, currentPath,
+      [&destination, &hoops](const Path& path) {
+        if (path.back() == destination) {
+          for (auto it = path.rbegin(); it != path.rend(); ++it) {
+            if (!hoops.try_emplace(*it).second) {
+              break;
+            }
+          }
+        } else {
+          for (auto it = path.rbegin(); it != path.rend(); ++it) {
+            auto hit = hoops.try_emplace(*it);
+          }
         }
+
       });
 }
 

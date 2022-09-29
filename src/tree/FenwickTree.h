@@ -67,7 +67,7 @@ class FenwickTree {
    * @note Time complexity is O(log(N))
    */
   T sum(size_t i) const noexcept {
-    i = i + 1;
+    ++i;
     T s = 0;
 
     while (i > 0) {

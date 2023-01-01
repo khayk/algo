@@ -53,14 +53,35 @@ TEST(SearchProblemsTests, MissingInSortedArray) {
 }
 
 
-TEST(SearchProblemsTests, DISABLED_MedianOfSortedArrays) {
-  ArrayInts a{1, 3, 5, 7};
-  ArrayInts b{9, 11, 17, 19, 19};
+TEST(SearchProblemsTests, MedianOfSortedArrays) {
+  ArrayInts a;
+  ArrayInts b;
 
+  a = {1, 3};
+  b = {2};
+  EXPECT_EQ(medianOfSortedArrays(a, b), 2);
+
+  a = {1, 2};
+  b = {3, 4};
+  EXPECT_EQ(medianOfSortedArrays(a, b), 2.5);
+
+  a = {1, 3, 5, 7};
+  b = {9, 11, 17, 19, 19};
   EXPECT_EQ(medianOfSortedArrays(a, b), 9);
 
   b = {2, 4, 6};
   EXPECT_EQ(medianOfSortedArrays(a, b), 4);
+
+  a = {5, 6, 11, 17, 18};
+  b = {1, 2, 3, 20, 20, 10000};
+  EXPECT_EQ(medianOfSortedArrays(a, b), 11);
+
+  a.clear();
+  b.clear();
+  EXPECT_EQ(medianOfSortedArrays(a, b), 0.0);
+
+  b = {1};
+  EXPECT_EQ(medianOfSortedArrays(a, b), 1);
 }
 
 

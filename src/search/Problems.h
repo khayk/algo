@@ -130,12 +130,58 @@ T missingInSortedArray(const std::vector<T>& a)
  * @return The median of the n + m elements
  */
 template <typename T>
-T medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b)
-{
-  std::ignore = a;
-  std::ignore = b;
+double medianOfSortedArrays(const std::vector<T>& a, const std::vector<T>& b) {
+  if (a.empty() && b.empty()) {
+    return 0.0;
+  }
 
-  return T();
+  if (a.size() > b.size()) {
+    return medianOfSortedArrays(b, a);
+  }
+
+  const auto valueAt = [](const std::vector<int>& x, int i) {
+    if (i < 0) {
+      return std::numeric_limits<int>::min();
+    }
+
+    if (i >= static_cast<int>(x.size())) {
+      return std::numeric_limits<int>::max();
+    }
+
+    return x[static_cast<size_t>(i)];
+  };
+
+  int low = 0;
+  auto high = static_cast<int>(a.size());
+  auto size = static_cast<int>(a.size() + b.size());
+
+  while (low <= high) {
+    int i = (low + high) / 2;
+    int j = (size + 1) / 2 - i;
+
+    const auto maxLeftA = valueAt(a, i - 1);
+    const auto minRightA = valueAt(a, i);
+    const auto maxLeftB = valueAt(b, j - 1);
+    const auto minRightB = valueAt(b, j);
+
+    if (maxLeftA <= minRightB && maxLeftB <= minRightA) {
+      auto maxLeft = std::max(maxLeftA, maxLeftB);
+
+      if (size % 2 == 1) {
+        return maxLeft;
+      }
+
+      auto minRight = std::min(minRightA, minRightB);
+
+      return static_cast<double>(maxLeft + minRight) / 2.0;
+    } else if (maxLeftA > minRightB) {
+      high = i - 1;
+    } else {
+      low = i + 1;
+    }
+  }
+
+  return 0.0;
 }
 
 

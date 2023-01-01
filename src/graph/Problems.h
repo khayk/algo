@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <unordered_set>
+#include <string>
 
 namespace alg {
 
@@ -39,6 +40,8 @@ void findPaths(const Graph& graph, const std::string& start,
                const std::string& destination, Paths& paths) {
   Path currentPath;
   Visited visited;
+
+  std::ignore = paths;
 
   std::unordered_map<std::string, std::unordered_set<std::string>> hoops;
 

@@ -6,11 +6,14 @@
 
 namespace alg {
 
+/**
+ * @brief Implementation of the Union-Find (or Disjoint Set) data structure.
+ */
 template <typename T>
 class UnionFind {
   static_assert(std::is_unsigned_v<T>, "T must be unsigned type");
 
-  std::vector<T> group_;
+  mutable std::vector<T> group_;
   std::vector<size_t> rank_;
 
  public:
@@ -22,7 +25,7 @@ class UnionFind {
   }
 
 
-  T find(T i) noexcept {
+  T find(T i) const noexcept {
     assert(i < group_.size());
 
     // While finding a head do path compression

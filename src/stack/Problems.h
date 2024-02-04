@@ -98,6 +98,6 @@ std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs);
  *
  * @ref leetcode 84
  */
-int largestRectangleArea(const std::vector<int>& heights);
+size_t largestRectangleInHistogram(const std::vector<size_t>& heights);
 
 }  // namespace alg

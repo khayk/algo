@@ -78,3 +78,22 @@ TEST(StackProblemsTests, ExclusiveTime) {
   act = exclusiveTime(2, logs);
   EXPECT_EQ(act, exp);
 }
+
+TEST(StackProblemsTests, LargestRectangleInHistogram) {
+  std::vector<size_t> heights;
+
+  heights = {2, 1, 5, 6, 2, 3};
+  EXPECT_EQ(largestRectangleInHistogram(heights), 10);
+
+  heights = {2, 4};
+  EXPECT_EQ(largestRectangleInHistogram(heights), 4);
+
+  heights = {1, 2, 3, 4, 5};
+  EXPECT_EQ(largestRectangleInHistogram(heights), 9);
+
+  heights = {2, 3, 1, 1, 1};
+  EXPECT_EQ(largestRectangleInHistogram(heights), 5);
+
+  heights = {2, 1, 2};
+  EXPECT_EQ(largestRectangleInHistogram(heights), 3);
+}

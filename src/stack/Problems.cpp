@@ -161,11 +161,33 @@ std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs) {
 }
 
 
-int largestRectangleArea(const std::vector<int>& heights)
-{
-  std::ignore = heights;
+size_t largestRectangleInHistogram(const std::vector<size_t>& heights) {
+  using ValueType = std::pair<size_t, size_t>;
+  std::stack<ValueType, std::vector<ValueType>> s;
+  size_t area = 0;
 
-  return 0;
+  for (size_t i = 0; i < heights.size(); ++i) {
+    size_t start = i;
+    while (!s.empty() && s.top().second > heights[i]) {
+      auto [idx, height] = s.top();
+      size_t width = i - idx;
+      s.pop();
+
+      area = std::max(area, height * width);
+      start = idx;
+    }
+
+    s.emplace(start, heights[i]);
+  }
+
+  while (!s.empty()) {
+    auto [idx, height] = s.top();
+    size_t width = heights.size() - idx;
+    s.pop();
+    area = std::max(area, height * width);
+  }
+
+  return area;
 }
 
 }  // namespace alg

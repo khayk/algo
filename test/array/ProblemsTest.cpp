@@ -11,9 +11,9 @@ TEST(ArrayProblemsTests, MaximumSubarraySum) {
   EXPECT_EQ(maximumSubarraySum(a), 6);
 
   // Edge cases
-  EXPECT_EQ({}, 0);
-  EXPECT_EQ({7}, 7);
-  EXPECT_EQ({-1}, -1);
+  EXPECT_EQ(maximumSubarraySum(std::vector<int>{}), 0);
+  EXPECT_EQ(maximumSubarraySum(std::vector<int>{7}), 7);
+  EXPECT_EQ(maximumSubarraySum(std::vector<int>{-1}), -1);
 }
 
 

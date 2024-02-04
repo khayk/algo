@@ -9,7 +9,7 @@ TEST(UnionFindTests, UnionFind) {
 
   UnionFind<uint32_t> uf(nodes.size());
 
-  for (int i = 0; i < nodes.size(); ++i) {
+  for (uint32_t i = 0; i < nodes.size(); ++i) {
     // Initially each item belongs to it's own group
     EXPECT_EQ(uf.find(i), i);
 

@@ -160,4 +160,12 @@ std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs) {
   return times;
 }
 
+
+int largestRectangleArea(const std::vector<int>& heights)
+{
+  std::ignore = heights;
+
+  return 0;
+}
+
 }  // namespace alg

@@ -10,7 +10,7 @@ if(MSVC)
    add_compile_options(/W4 /WX /MP)
    add_compile_definitions(_WIN32_WINNT=0x0A00)
 else()
-   add_compile_options(-Wall -Wextra -Wpedantic)
+   add_compile_options(-Wall -Wextra -Wpedantic -Wno-undefined-var-template)
 endif()
 
 # Diagnostic information
@@ -20,7 +20,7 @@ include(FetchContent)
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.12.1
+    GIT_TAG v1.14.0
 )
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings

@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <limits>
 #include <vector>
 #include <array>
 #include <type_traits>
@@ -23,7 +24,7 @@ template <typename T>
 int maximumSubarraySum(const std::vector<T>& arr) {
   static_assert(std::is_integral_v<T>, "T must integer type");
 
-  T best{}, sum{};
+  T best{arr.size() ? arr[0] : 0}, sum{};
 
   for (const auto& a: arr) {
     sum = std::max(a, sum + a);

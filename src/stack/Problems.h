@@ -81,4 +81,23 @@ bool isBracketsBalanced(const std::string_view str);
  */
 std::vector<int> exclusiveTime(int n, const std::vector<std::string>& logs);
 
+
+/**
+ * @brief  Given an array of integers heights representing the histogram's bar
+ *         height where the width of each bar is 1, return the area of the largest
+ *         rectangle in the histogram.
+ *
+ * @param heights  The bar heights array
+ *
+ * Constraints:
+ *
+ *   1 <= heights.length <= 10^5
+ *   0 <= heights[i] <= 10^4
+ *
+ * @return  The area of the largest rectangle in the histogram
+ *
+ * @ref leetcode 84
+ */
+int largestRectangleArea(const std::vector<int>& heights);
+
 }  // namespace alg

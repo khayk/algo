@@ -56,6 +56,7 @@ void findPaths(const Graph& graph, const std::string& start,
         } else {
           for (auto it = path.rbegin(); it != path.rend(); ++it) {
             auto hit = hoops.try_emplace(*it);
+            std::ignore = hit;
           }
         }
 

@@ -32,5 +32,7 @@ include_directories(src)
 set(projectLib ${CMAKE_PROJECT_NAME}-lib)
 set(projectTest ${CMAKE_PROJECT_NAME}-test)
 
+message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
 add_subdirectory(src bin)
 add_subdirectory(test)

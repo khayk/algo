@@ -122,4 +122,29 @@ void print(const Matrix<T>& m, size_t width = 0) {
   }
 }
 
+
+template <typename Function>
+class ScopeGuard {
+  Function function;
+  bool dismissed;
+
+ public:
+  explicit ScopeGuard(Function&& function)
+      : function(std::move(function)), dismissed(false) {}
+
+  void dismiss() { dismissed = true; }
+
+  ~ScopeGuard() noexcept {
+    if (!dismissed) {
+      function();
+    }
+  }
+};
+
+template <typename Function>
+ScopeGuard<Function> makeScopeGuard(Function&& function) {
+  return ScopeGuard<Function>(std::forward<Function>(function));
+}
+
+
 }  // namespace alg

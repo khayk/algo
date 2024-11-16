@@ -7,7 +7,7 @@
       "name": "algo-test.exe (test\\algo-test.exe)",
       "project": "CMakeLists.txt",
       "projectTarget": "algo-test.exe (test\\algo-test.exe)",
-      "args": [ "--gtest_filter=*TrieTest*", "--gtest_repeat=1" ]
+        "args": [ "--gtest_filter=*TrieTest*", "--gtest_repeat=1 --gtest_also_run_disabled_tests" ]
     }
   ]
 }

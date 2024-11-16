@@ -17,6 +17,7 @@ namespace alg {
 
 class TrieNode {
   Impl impl_;
+  size_t words_{0};
   Character ch_{' '};
   bool isLeaf_{false};
 
@@ -33,6 +34,7 @@ class TrieNode {
       return false;
     }
 
+    bool inserted = false;
     const auto ch = word.front();
     TrieNode* node = impl().find(ch);
 
@@ -41,39 +43,42 @@ class TrieNode {
     }
 
     if (word.size() == 1) {
-      bool inserted = node->isLeaf_;
+      inserted = !node->isLeaf_;
       node->isLeaf_ = true;
-      return inserted;
+    } else {
+      word.remove_prefix(1);
+      inserted = node->insert(word);
     }
 
-    word.remove_prefix(1);
-    return node->insert(word);
+    words_ += (inserted ? 1 : 0);
+    return inserted;
   }
 
   bool remove(StringView word) {
+    bool removed = true;
+
     if (word.empty()) {
-      bool removed = isLeaf_;
+      removed = isLeaf_;
       isLeaf_ = false;
-      return removed;
+    } else {
+      const char ch = word[0];
+      auto* child = impl().find(ch);
+      if (!child) {
+        return false;
+      }
+
+      StringView suffix = word.substr(1);
+      if (!child->remove(suffix)) {
+        return false;
+      }
+
+      if (child->empty() && !child->isLeaf()) {
+        impl().remove(ch);
+      }
     }
 
-    const char ch = word[0];
-    auto* child = impl().find(ch);
-    if (!child) {
-      return false;
-    }
-
-    StringView suffix = word.substr(1);
-    if (!child->remove(suffix)) {
-      return false;
-    }
-
-    if (child->empty() && !child->isLeaf()) {
-      impl().remove(ch);
-      return true;
-    }
-
-    return false;
+    words_ -= (removed ? 1 : 0);
+    return removed;
   }
 
   bool search(StringView word) const {
@@ -99,11 +104,7 @@ class TrieNode {
   }
 
   size_t numWords() const noexcept {
-    size_t count = 0;
-    impl().enumerate(
-        [&count](const TrieNode* node) { count += node->numWords(); });
-
-    return count + (isLeaf_ ? 1 : 0);
+    return words_;
   }
 
   bool empty() { return impl().empty(); }

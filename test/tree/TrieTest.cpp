@@ -1,11 +1,34 @@
 #include <gtest/gtest.h>
+
 #include "tree/Trie.h"
+#include "System.h"
+
 #include <filesystem>
 #include <fstream>
 #include <queue>
 
 using namespace alg;
+
 namespace fs = std::filesystem;
+
+namespace {
+
+class MemoryUsageReporter {
+  size_t initialMem_{};
+
+ public:
+  MemoryUsageReporter() { initialMem_ = sys::currentProcessMemoryUsage(); }
+  ~MemoryUsageReporter() {
+    const auto currentMem = sys::currentProcessMemoryUsage();
+    if (currentMem > initialMem_) {
+      std::cout << "Used memory: " << currentMem - initialMem_ << " bytes\n";
+    } else {
+      std::cout << "Free memory: " << initialMem_ - currentMem << " bytes\n";
+    }
+  }
+};
+
+} // namespace
 
 TEST(TrieTests, Defaults) {
   Trie trie;
@@ -85,6 +108,20 @@ TEST(TrieTests, RemoveSubWordRemains) {
 }
 
 
+TEST(TrieTests, RemoveNonExistingWord) {
+  Trie trie;
+
+  trie.insert("foo");
+  trie.insert("foobar");
+
+  trie.remove("fooba");
+  EXPECT_TRUE(trie.search("foobar"));
+  EXPECT_TRUE(trie.search("foo"));
+  EXPECT_EQ(2, trie.numWords());
+  EXPECT_EQ(7, trie.numNodes());
+}
+
+
 TEST(TrieTests, RemoveHasNoSideEffects) {
   Trie trie;
 
@@ -154,18 +191,22 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
   size_t inserted = 0;
   size_t skipped = 0;
 
-  while (in) {
-    in >> word;
-    if (!word.empty()) {
-      if (!std::all_of(word.begin(), word.end(), ::islower)) {
-        ++skipped;
-        continue;
+  {
+    MemoryUsageReporter mur;
+
+    while (in) {
+      in >> word;
+      if (!word.empty()) {
+        if (!std::all_of(word.begin(), word.end(), ::islower)) {
+          ++skipped;
+          continue;
+        }
+        ++inserted;
+        trie.insert(word);
+        EXPECT_TRUE(trie.search(word));
       }
-      ++inserted;
-      trie.insert(word);
-      EXPECT_TRUE(trie.search(word));
+      words.push(word);
     }
-    words.push(word);
   }
 
   std::cout << "node size: " << sizeof(TrieNode) << '\n';
@@ -174,15 +215,18 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
   std::cout << "inserted:  " << inserted << '\n';
   std::cout << "skipped:   " << skipped << '\n';
 
-  size_t numWords = trie.numWords();
-  while (!words.empty())
   {
-    trie.remove(words.front());
-    --numWords;
-    EXPECT_FALSE(trie.search(word));
-    ASSERT_EQ(numWords, trie.numWords());
+    MemoryUsageReporter mur;
+    size_t numWords = trie.numWords();
+    while (!words.empty())
+    {
+      trie.remove(words.front());
+      --numWords;
+      EXPECT_FALSE(trie.search(word));
+      ASSERT_EQ(numWords, trie.numWords());
 
-    words.pop();    
+      words.pop();
+    }
   }
 
   std::cout << "node size: " << sizeof(TrieNode) << '\n';

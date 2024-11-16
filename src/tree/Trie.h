@@ -212,7 +212,7 @@ class TrieNode {
       return false;
     }
 
-    if (child->empty()) {
+    if (child->empty() && !child->isLeaf()) {
       impl().remove(word[0]);
       return true;
     }
@@ -251,6 +251,8 @@ class TrieNode {
   }
 
   bool empty() { return impl().empty(); }
+
+  bool isLeaf() const noexcept { return isLeaf_; }
 };
 
 inline void deleteTrieNode(TrieNode* node) {

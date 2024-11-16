@@ -2,6 +2,7 @@
 #include "tree/Trie.h"
 #include <filesystem>
 #include <fstream>
+#include <queue>
 
 using namespace alg;
 namespace fs = std::filesystem;
@@ -66,6 +67,24 @@ TEST(TrieTests, Remove) {
 }
 
 
+TEST(TrieTests, RemoveSubWordRemains) {
+  Trie trie;
+
+  trie.insert("foo");
+  const size_t numNodes = trie.numNodes();
+  EXPECT_EQ(1, trie.numWords());
+  
+  trie.insert("foobar");
+  EXPECT_EQ(2, trie.numWords());
+
+  trie.remove("foobar");
+  EXPECT_EQ(numNodes, trie.numNodes());
+  EXPECT_FALSE(trie.search("foobar"));
+  EXPECT_TRUE(trie.search("foo"));
+  EXPECT_EQ(1, trie.numWords());
+}
+
+
 TEST(TrieTests, RemoveHasNoSideEffects) {
   Trie trie;
 
@@ -86,7 +105,7 @@ TEST(TrieTests, RemoveHasNoSideEffects) {
 }
 
 
-TEST(TrieTests, MultipleWords) {
+TEST(TrieTests, MixUsage) {
   Trie trie;
 
   trie.insert("fee");
@@ -104,6 +123,12 @@ TEST(TrieTests, MultipleWords) {
   EXPECT_TRUE(trie.search("fee"));
   EXPECT_TRUE(trie.search("feed"));
   EXPECT_TRUE(trie.search("ask"));
+
+  trie.remove("feed");
+  EXPECT_EQ(2, trie.numWords());
+  EXPECT_EQ(7, trie.numNodes());
+  EXPECT_TRUE(trie.search("ask"));
+  EXPECT_TRUE(trie.search("fee"));
 }
 
 
@@ -125,6 +150,7 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
   std::string word;
   ASSERT_TRUE(in);
 
+  std::queue<std::string> words;
   size_t inserted = 0;
   size_t skipped = 0;
 
@@ -139,6 +165,24 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
       trie.insert(word);
       EXPECT_TRUE(trie.search(word));
     }
+    words.push(word);
+  }
+
+  std::cout << "node size: " << sizeof(TrieNode) << '\n';
+  std::cout << "words:     " << trie.numWords() << '\n';
+  std::cout << "nodes:     " << trie.numNodes() << '\n';
+  std::cout << "inserted:  " << inserted << '\n';
+  std::cout << "skipped:   " << skipped << '\n';
+
+  size_t numWords = trie.numWords();
+  while (!words.empty())
+  {
+    trie.remove(words.front());
+    --numWords;
+    EXPECT_FALSE(trie.search(word));
+    ASSERT_EQ(numWords, trie.numWords());
+
+    words.pop();    
   }
 
   std::cout << "node size: " << sizeof(TrieNode) << '\n';

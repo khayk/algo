@@ -135,12 +135,24 @@ class ListImpl {
     return children_.front().second.get();
   }
 
+  void remove(const Character ch) {
+    children_.remove_if([ch](const auto& entry) {
+      return entry.first == ch;
+    });
+  }
+
   template <typename Cb>
   void enumerate(Cb cb) const {
     for (const auto& [_, node] : children_) {
       cb(node.get());
     }
   }
+
+  size_t numNodes() {
+    return distance(children_.begin(), children_.end());
+  }
+
+  size_t empty() { return children_.begin() == children_.end(); }
 };
 
 //using Impl = MapImpl<std::map<Character, TrieNodePtr>>;
@@ -161,9 +173,9 @@ class TrieNode {
 
   Character character() const noexcept { return ch_; }
 
-  void insert(StringView word) {
+  bool insert(StringView word) {
     if (word.empty()) {
-      return;
+      return false;
     }
 
     const auto ch = word.front();
@@ -174,14 +186,39 @@ class TrieNode {
     }
 
     if (word.size() == 1) {
+      bool inserted = node->isLeaf_;
       node->isLeaf_ = true;
+      return inserted;
     }
 
     word.remove_prefix(1);
-    node->insert(word);
+    return node->insert(word);
   }
 
-  void remove(StringView word) { std::ignore = word; }
+  bool remove(StringView word) {
+    if (word.empty()) {
+      bool removed = isLeaf_;
+      isLeaf_ = false;
+      return removed;
+    }
+
+    auto* child = impl().find(word[0]);
+    if (!child) {
+      return false;
+    }
+
+    StringView suffix = word.substr(1);
+    if (!child->remove(suffix)) {
+      return false;
+    }
+
+    if (child->empty()) {
+      impl().remove(word[0]);
+      return true;
+    }
+
+    return false;
+  }
 
   bool search(StringView word) const {
     const TrieNode* node = this;
@@ -212,8 +249,9 @@ class TrieNode {
 
     return count + (isLeaf_ ? 1 : 0);
   }
-};
 
+  bool empty() { return impl().empty(); }
+};
 
 inline void deleteTrieNode(TrieNode* node) {
   if (node) {
@@ -250,9 +288,9 @@ class Trie {
  public:
   Trie() : root_(createTrieNode('*')) {}
 
-  void insert(StringView word) { root_->insert(word); }
+  bool insert(StringView word) { return root_->insert(word); }
 
-  void remove(StringView word) { root_->remove(word); }
+  bool remove(StringView word) { return root_->remove(word); }
 
   bool search(StringView word) { return root_->search(word); }
 

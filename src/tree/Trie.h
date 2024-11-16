@@ -1,164 +1,19 @@
 #pragma once
 
+// Uncomment below to see details about structure during runtime
 // #define VERBOSE_TRIE
 
-#include <memory>
-#include <string>
-#include <string_view>
-#include <array>
-#include <forward_list>
+#include "TrieFwd.h"
 
-// #include <unordered_map>
-// #include <map>
+// Defaulting to list implementation
+#include "impl/TrieChildrenList.h"
+using Impl = alg::ListImpl;
 
 #ifdef VERBOSE_TRIE
 #include <iostream>
 #endif
 
 namespace alg {
-
-class TrieNode;
-class TrieNodeDeleter;
-using TrieNodePtr = std::unique_ptr<TrieNode, TrieNodeDeleter>;
-
-using Character  = char;
-using String     = std::basic_string<Character>;
-using StringView = std::basic_string_view<Character>;
-
-TrieNodePtr createTrieNode(const Character ch);
-void deleteTrieNode(TrieNode* node);
-
-class TrieNodeDeleter {
- public:
-  void operator()(TrieNode* node) const noexcept {
-    deleteTrieNode(node);
-  }
-};
-
-
-template <typename UnderlyingMap>
-class MapImpl {
-  UnderlyingMap children_;
-
- public:
-  TrieNode* find(const Character ch) {
-    auto it = children_.find(ch);
-
-    if (it == children_.end()) {
-      return nullptr;
-    }
-
-    return it->second.get();
-  };
-
-  const TrieNode* find(const Character ch) const {
-    const auto it = children_.find(ch);
-
-    if (it == children_.end()) {
-      return nullptr;
-    }
-
-    return it->second.get();
-  };
-
-  TrieNode* insert(const Character ch, TrieNodePtr node) {
-    auto it = children_.emplace(ch, std::move(node));
-    return it.first->second.get();
-  }
-
-  template <typename Cb>
-  void enumerate(Cb cb) const {
-    for (const auto& [_, node] : children_) {
-      cb(node.get());
-    }
-  }
-};
-
-
-template <size_t N>
-class ArrayImpl {
-  std::array<TrieNodePtr, N> children_;
-
- public:
-  TrieNode* find(Character ch) {
-    ch -= 'a';
-    return children_[ch].get();
-  };
-
-  const TrieNode* find(Character ch) const {
-    ch -= 'a';
-    return children_[ch].get();
-  };
-
-  TrieNode* insert(Character ch, TrieNodePtr node) {
-    ch -= 'a';
-    children_[ch] = std::move(node);
-    return children_[ch].get();
-  }
-
-  template <typename Cb>
-  void enumerate(Cb cb) const {
-    for (const auto& node : children_) {
-      if (node.get()) {
-        cb(node.get());
-      }
-    }
-  }
-};
-
-class ListImpl {
-  std::forward_list<std::pair<Character, TrieNodePtr>> children_;
-
- public:
-  TrieNode* find(const Character ch) {
-    for (auto& node : children_) {
-      if (node.first == ch) {
-        return node.second.get();
-      }
-    }
-
-    return nullptr;
-  };
-
-  const TrieNode* find(const Character ch) const {
-    for (const auto& node : children_) {
-      if (node.first == ch) {
-        return node.second.get();
-      }
-    }
-
-    return nullptr;
-  };
-
-  TrieNode* insert(const Character ch, TrieNodePtr node) {
-    children_.emplace_front(ch, std::move(node));
-    return children_.front().second.get();
-  }
-
-  void remove(const Character ch) {
-    children_.remove_if([ch](const auto& entry) {
-      return entry.first == ch;
-    });
-  }
-
-  template <typename Cb>
-  void enumerate(Cb cb) const {
-    for (const auto& [_, node] : children_) {
-      cb(node.get());
-    }
-  }
-
-  size_t numNodes() {
-    return distance(children_.begin(), children_.end());
-  }
-
-  size_t empty() { return children_.begin() == children_.end(); }
-};
-
-//using Impl = MapImpl<std::map<Character, TrieNodePtr>>;
-//using Impl = MapImpl<std::unordered_map<Character, TrieNodePtr>>;
-//using Impl = ArrayImpl<26>;
-using Impl = ListImpl;
 
 class TrieNode {
   Impl impl_;
@@ -202,7 +57,8 @@ class TrieNode {
       return removed;
     }
 
-    auto* child = impl().find(word[0]);
+    const char ch = word[0];
+    auto* child = impl().find(ch);
     if (!child) {
       return false;
     }
@@ -213,7 +69,7 @@ class TrieNode {
     }
 
     if (child->empty() && !child->isLeaf()) {
-      impl().remove(word[0]);
+      impl().remove(ch);
       return true;
     }
 
@@ -255,6 +111,7 @@ class TrieNode {
   bool isLeaf() const noexcept { return isLeaf_; }
 };
 
+
 inline void deleteTrieNode(TrieNode* node) {
   if (node) {
 #ifdef VERBOSE_TRIE
@@ -266,13 +123,10 @@ inline void deleteTrieNode(TrieNode* node) {
 #ifdef VERBOSE_TRIE
     std::cout << "deleted: " << node << " [" << ch << "]\n";
 #endif
-
     node = nullptr;
   }
 }
 
-//size_t idx_{1500000};
-//std::vector<TrieNode> nodes_(idx_ + 1);
 
 inline TrieNodePtr createTrieNode(const Character ch) {
   TrieNodePtr node(new TrieNode(ch));

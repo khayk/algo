@@ -43,7 +43,7 @@ TEST(TrieTests, Defaults) {
 TEST(TrieTests, Insert) {
   Trie trie;
 
-  EXPECT_NO_THROW(trie.insert("foo"));
+  EXPECT_TRUE(trie.insert("foo"));
 
   EXPECT_EQ(1, trie.numWords());
   EXPECT_EQ(4, trie.numNodes());
@@ -68,7 +68,7 @@ TEST(TrieTests, Search) {
   const auto word = "hello";
 
   EXPECT_FALSE(trie.search(word));
-  EXPECT_NO_THROW(trie.insert(word));
+  EXPECT_TRUE(trie.insert(word));
   EXPECT_TRUE(trie.search(word));
 }
 
@@ -79,10 +79,10 @@ TEST(TrieTests, Remove) {
   const auto word = "erase";
 
   EXPECT_FALSE(trie.search(word));
-  trie.insert(word);
+  EXPECT_TRUE(trie.insert(word));
   EXPECT_TRUE(trie.search(word));
 
-  trie.remove(word);
+  EXPECT_TRUE(trie.remove(word));
 
   EXPECT_FALSE(trie.search(word));
   EXPECT_EQ(1, trie.numNodes());
@@ -96,14 +96,15 @@ TEST(TrieTests, RemoveSubWordRemains) {
   trie.insert("foo");
   const size_t numNodes = trie.numNodes();
   EXPECT_EQ(1, trie.numWords());
-  
+
   trie.insert("foobar");
   EXPECT_EQ(2, trie.numWords());
 
-  trie.remove("foobar");
-  EXPECT_EQ(numNodes, trie.numNodes());
+  EXPECT_TRUE(trie.remove("foobar"));
+
   EXPECT_FALSE(trie.search("foobar"));
   EXPECT_TRUE(trie.search("foo"));
+  EXPECT_EQ(numNodes, trie.numNodes());
   EXPECT_EQ(1, trie.numWords());
 }
 
@@ -114,7 +115,9 @@ TEST(TrieTests, RemoveNonExistingWord) {
   trie.insert("foo");
   trie.insert("foobar");
 
-  trie.remove("fooba");
+  // The word doesn't exist, remove should have no effect
+  EXPECT_FALSE(trie.remove("fooba"));
+
   EXPECT_TRUE(trie.search("foobar"));
   EXPECT_TRUE(trie.search("foo"));
   EXPECT_EQ(2, trie.numWords());
@@ -132,7 +135,7 @@ TEST(TrieTests, RemoveHasNoSideEffects) {
   EXPECT_TRUE(trie.search("goods"));
   EXPECT_EQ(2, trie.numWords());
   EXPECT_EQ(6, trie.numNodes());
-  
+
   trie.remove("good");
 
   EXPECT_FALSE(trie.search("good"));

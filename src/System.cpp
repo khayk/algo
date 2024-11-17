@@ -9,9 +9,6 @@
 #include "System.h"
 #include "Utils.h"
 
-#include <stdexcept>
-#include <string>
-
 namespace sys {
 
 uint32_t currentProcessId() noexcept {

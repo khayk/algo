@@ -4,6 +4,7 @@
   #include <Psapi.h>
 #else
   #include <pwd.h>
+  #include <unistd.h>
 #endif
 
 #include "System.h"
@@ -38,20 +39,22 @@ size_t processMemoryUsage(uint32_t pid) noexcept {
 
   return pmc.WorkingSetSize;
 #else
-  task_t task{};
-  kern_return_t error = task_for_pid(mach_task_self(), pid, &task);
-  if (error != KERN_SUCCESS) {
-    return 0;
-  }
+  std::ignore = pid;
+  return 0;
+  // task_t task{};
+  // kern_return_t error = task_for_pid(mach_task_self(), pid, &task);
+  // if (error != KERN_SUCCESS) {
+  //   return 0;
+  // }
 
-  mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
-  task_vm_info_data_t ti{};
-  error = task_info(task, TASK_VM_INFO, (task_info_t)&ti, &count);
-  if (error != KERN_SUCCESS) {
-    return 0;
-  }
+  // mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
+  // task_vm_info_data_t ti{};
+  // error = task_info(task, TASK_VM_INFO, (task_info_t)&ti, &count);
+  // if (error != KERN_SUCCESS) {
+  //   return 0;
+  // }
 
-  return ti.phys_footprint;
+  // return ti.phys_footprint;
 #endif
 }
 

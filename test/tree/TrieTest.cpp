@@ -238,3 +238,34 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
   std::cout << "inserted:  " << inserted << '\n';
   std::cout << "skipped:   " << skipped << '\n';
 }
+
+TEST(TrieTests, LargeDictionaryFiles) {
+  Trie trie;
+  fs::path dict("C:\\Code\\allfiles.txt");
+  std::ifstream in(dict, std::ios::in);
+  std::string word;
+  ASSERT_TRUE(in);
+
+  size_t inserted = 0;
+  size_t skipped = 0;
+
+  {
+    MemoryUsageReporter mur;
+
+    while (in) {
+      word.clear();
+      std::getline(in, word);
+
+      if (!word.empty()) {
+        ++inserted;
+        trie.insert(word);
+      }
+    }
+  }
+
+  std::cout << "node size: " << sizeof(TrieNode) << '\n';
+  std::cout << "words:     " << trie.numWords() << '\n';
+  std::cout << "nodes:     " << trie.numNodes() << '\n';
+  std::cout << "inserted:  " << inserted << '\n';
+  std::cout << "skipped:   " << skipped << '\n';
+}

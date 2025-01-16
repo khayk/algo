@@ -7,6 +7,7 @@
 
 // Defaulting to list implementation
 #include "impl/TrieChildrenList.h"
+#include <vector>
 using Impl = alg::ListImpl;
 
 #ifdef VERBOSE_TRIE
@@ -17,7 +18,7 @@ namespace alg {
 
 class TrieNode {
   Impl impl_;
-  size_t words_{0};
+  uint32_t words_{0};
   Character ch_{' '};
   bool isLeaf_{false};
 
@@ -25,7 +26,9 @@ class TrieNode {
   const Impl& impl() const noexcept { return impl_; }
 
  public:
-  TrieNode(const Character ch) { ch_ = ch; }
+  TrieNode(const Character ch) {
+    ch_ = ch;
+  }
 
   Character character() const noexcept { return ch_; }
 
@@ -39,7 +42,7 @@ class TrieNode {
     TrieNode* node = impl().find(ch);
 
     if (!node) {
-      node = impl().insert(ch, createTrieNode(ch));
+      node = impl().insert(createTrieNode(ch));
     }
 
     if (word.size() == 1) {
@@ -95,15 +98,15 @@ class TrieNode {
     return node->isLeaf_;
   }
 
-  size_t numNodes() const noexcept {
-    size_t count = 0;
+  uint32_t numNodes() const noexcept {
+    uint32_t count = 0;
     impl().enumerate(
         [&count](const TrieNode* node) { count += node->numNodes(); });
 
     return count + 1;
   }
 
-  size_t numWords() const noexcept {
+  uint32_t numWords() const noexcept {
     return words_;
   }
 
@@ -112,6 +115,8 @@ class TrieNode {
   bool isLeaf() const noexcept { return isLeaf_; }
 };
 
+std::vector<char> g_mem(22'313'636 * sizeof(TrieNode) + 10, ' ');
+size_t g_idx{0};
 
 inline void deleteTrieNode(TrieNode* node) {
   if (node) {
@@ -119,7 +124,7 @@ inline void deleteTrieNode(TrieNode* node) {
     const auto ch = node->character();
 #endif
 
-    delete node;
+    //delete node;
 
 #ifdef VERBOSE_TRIE
     std::cout << "deleted: " << node << " [" << ch << "]\n";
@@ -130,7 +135,11 @@ inline void deleteTrieNode(TrieNode* node) {
 
 
 inline TrieNodePtr createTrieNode(const Character ch) {
-  TrieNodePtr node(new TrieNode(ch));
+  TrieNode* ptr = (TrieNode*)(&g_mem[g_idx]);
+  //ptr = &g_nodes[g_idx++];
+  g_idx += sizeof(TrieNode);
+
+  TrieNodePtr node(new (ptr)TrieNode(ch));
 
 #ifdef VERBOSE_TRIE
   std::cout << "created: " << node << " [" << node->character() << "]\n";
@@ -138,6 +147,10 @@ inline TrieNodePtr createTrieNode(const Character ch) {
   return node;
 }
 
+inline Character nodeCharacter(const TrieNode* node)
+{
+  return node->character();
+}
 
 class Trie {
   TrieNodePtr root_;
@@ -149,11 +162,11 @@ class Trie {
 
   bool remove(StringView word) { return root_->remove(word); }
 
-  bool search(StringView word) { return root_->search(word); }
+  bool search(StringView word) const { return root_->search(word); }
 
-  size_t numNodes() const noexcept { return root_->numNodes(); }
+  uint32_t numNodes() const noexcept { return root_->numNodes(); }
 
-  size_t numWords() const noexcept { return root_->numWords(); }
+  uint32_t numWords() const noexcept { return root_->numWords(); }
 };
 
 }  // namespace alg

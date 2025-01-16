@@ -4,17 +4,18 @@
 #include <utility>
 
 #include "../TrieFwd.h"
+#include "tree/Trie.h"
 
 namespace alg {
 
 class ListImpl {
-  std::forward_list<std::pair<Character, TrieNodePtr>> children_;
+  std::forward_list<TrieNodePtr> children_;
 
  public:
   TrieNode* find(const Character ch) {
     for (auto& node : children_) {
-      if (node.first == ch) {
-        return node.second.get();
+      if (nodeCharacter(node.get()) == ch) {
+        return node.get();
       }
     }
 
@@ -23,28 +24,28 @@ class ListImpl {
 
   const TrieNode* find(const Character ch) const {
     for (const auto& node : children_) {
-      if (node.first == ch) {
-        return node.second.get();
+      if (nodeCharacter(node.get()) == ch) {
+        return node.get();
       }
     }
 
     return nullptr;
   };
 
-  TrieNode* insert(const Character ch, TrieNodePtr node) {
-    children_.emplace_front(ch, std::move(node));
-    return children_.front().second.get();
+  TrieNode* insert(TrieNodePtr node) {
+    children_.emplace_front(std::move(node));
+    return children_.front().get();
   }
 
   void remove(const Character ch) {
     children_.remove_if([ch](const auto& entry) {
-      return entry.first == ch;
+      return nodeCharacter(entry.get()) == ch;
     });
   }
 
   template <typename Cb>
   void enumerate(Cb cb) const {
-    for (const auto& [_, node] : children_) {
+    for (const auto& node : children_) {
       cb(node.get());
     }
   }

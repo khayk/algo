@@ -16,6 +16,7 @@ using StringView = std::basic_string_view<Character>;
 
 TrieNodePtr createTrieNode(const Character ch);
 void deleteTrieNode(TrieNode* node);
+Character nodeCharacter(const TrieNode* node);
 
 class TrieNodeDeleter {
  public:

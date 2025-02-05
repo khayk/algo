@@ -115,8 +115,8 @@ class TrieNode {
   bool isLeaf() const noexcept { return isLeaf_; }
 };
 
-std::vector<char> g_mem(22'313'636 * sizeof(TrieNode) + 10, ' ');
-size_t g_idx{0};
+// std::vector<char> g_mem(22'313'636 * sizeof(TrieNode) + 10, ' ');
+// size_t g_idx{0};
 
 inline void deleteTrieNode(TrieNode* node) {
   if (node) {
@@ -124,7 +124,7 @@ inline void deleteTrieNode(TrieNode* node) {
     const auto ch = node->character();
 #endif
 
-    //delete node;
+    delete node;
 
 #ifdef VERBOSE_TRIE
     std::cout << "deleted: " << node << " [" << ch << "]\n";
@@ -135,12 +135,12 @@ inline void deleteTrieNode(TrieNode* node) {
 
 
 inline TrieNodePtr createTrieNode(const Character ch) {
-  TrieNode* ptr = (TrieNode*)(&g_mem[g_idx]);
+  // TrieNode* ptr = (TrieNode*)(&g_mem[g_idx]);
   //ptr = &g_nodes[g_idx++];
-  g_idx += sizeof(TrieNode);
+  // g_idx += sizeof(TrieNode);
 
-  TrieNodePtr node(new (ptr)TrieNode(ch));
-
+  // TrieNodePtr node(new (ptr)TrieNode(ch));
+  TrieNodePtr node(new TrieNode(ch));
 #ifdef VERBOSE_TRIE
   std::cout << "created: " << node << " [" << node->character() << "]\n";
 #endif

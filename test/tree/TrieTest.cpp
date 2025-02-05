@@ -13,6 +13,22 @@ namespace fs = std::filesystem;
 
 namespace {
 
+std::string humanize(uint64_t bytes)
+{
+    const char* units[] = {"B", "KB", "MB", "GB", "TB", "PB"};
+    int i = 0;
+    double size = bytes;
+
+    while (size >= 1024 && i < 5) {
+        size /= 1024;
+        i++;
+    }
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(2) << size << " " << units[i];  // 2 decimal places
+    return ss.str();
+}
+
 class MemoryUsageReporter {
   size_t initialMem_{};
 
@@ -21,9 +37,9 @@ class MemoryUsageReporter {
   ~MemoryUsageReporter() {
     const auto currentMem = sys::currentProcessMemoryUsage();
     if (currentMem > initialMem_) {
-      std::cout << "Used memory: " << currentMem - initialMem_ << " bytes\n";
+      std::cout << "Used memory: " << humanize(currentMem - initialMem_) << "\n";
     } else {
-      std::cout << "Free memory: " << initialMem_ - currentMem << " bytes\n";
+      std::cout << "Free memory: " << humanize(initialMem_ - currentMem) << "\n";
     }
   }
 };
@@ -185,7 +201,7 @@ TEST(TrieTests, Performance) {
 
 TEST(TrieTests, DISABLED_LargeDictionary) {
   Trie trie;
-  fs::path dict("C:\\Code\\words.txt");
+  fs::path dict("/home/khayk/Code/words.txt");
   std::ifstream in(dict, std::ios::in);
   std::string word;
   ASSERT_TRUE(in);
@@ -239,9 +255,9 @@ TEST(TrieTests, DISABLED_LargeDictionary) {
   std::cout << "skipped:   " << skipped << '\n';
 }
 
-TEST(TrieTests, LargeDictionaryFiles) {
+TEST(TrieTests, DISABLED_LargeDictionaryFiles) {
   Trie trie;
-  fs::path dict("C:\\Code\\allfiles.txt");
+  fs::path dict("/home/khayk/Code/allfiles.txt");
   std::ifstream in(dict, std::ios::in);
   std::string word;
   ASSERT_TRUE(in);

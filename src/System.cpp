@@ -5,10 +5,12 @@
 #else
   #include <pwd.h>
   #include <unistd.h>
+
+  #include <fstream>
+  #include <sstream>
 #endif
 
 #include "System.h"
-#include "Utils.h"
 
 namespace sys {
 
@@ -39,22 +41,25 @@ size_t processMemoryUsage(uint32_t pid) noexcept {
 
   return pmc.WorkingSetSize;
 #else
-  std::ignore = pid;
-  return 0;
-  // task_t task{};
-  // kern_return_t error = task_for_pid(mach_task_self(), pid, &task);
-  // if (error != KERN_SUCCESS) {
-  //   return 0;
-  // }
+  std::string filename = "/proc/" + std::to_string(pid) + "/status";
+  std::ifstream file(filename, std::ios::in);
 
-  // mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
-  // task_vm_info_data_t ti{};
-  // error = task_info(task, TASK_VM_INFO, (task_info_t)&ti, &count);
-  // if (error != KERN_SUCCESS) {
-  //   return 0;
-  // }
+  if (!file.is_open()) {
+    return 0;
+  }
 
-  // return ti.phys_footprint;
+  std::string line;
+  long memory = -1;
+  while (getline(file, line)) {
+    if (line.find("VmRSS:") == 0) {
+      std::istringstream iss(line);
+      std::string label;
+      iss >> label >> memory;
+      break;
+    }
+  }
+
+  return memory * 1024;
 #endif
 }
 
